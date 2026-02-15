@@ -59,7 +59,7 @@ I file di release vengono generati in `dist/`:
 
 ```bash
 # Clone
-git clone https://github.com/UTENTE/bbs-client-go.git
+git clone https://github.com/Metro-Olografix/bbs-client-go.git
 cd bbs-client-go
 
 # Dev mode con hot reload
