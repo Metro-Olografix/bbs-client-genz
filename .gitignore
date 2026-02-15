@@ -5,8 +5,15 @@ bbsclient
 
 # Build artifacts
 build/bin/
+dist/
 
-# Downloads e logs
+# Bundle export
+*.bundle
+
+# Documenti interni
+CODE_REVIEW.md
+
+# Downloads e logs runtime
 downloads/
 logs/
 
@@ -19,3 +26,9 @@ Thumbs.db
 .vscode/
 *.swp
 *.swo
+
+# Go
+vendor/
+
+# Node (se usato per frontend tooling)
+node_modules/
