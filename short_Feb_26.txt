@@ -1,0 +1,1049 @@
+              The BBS Corner TELNET BBS GUIDE - February 2026
+            --------------------------------------------------
+            Copyright by The BBS Corner & The Telnet BBS Guide
+                    A service of the Diamond Mine Online
+                          Fredericksburg, VA USA
+ 
+                    Web: https://www.telnetbbsguide.com
+                          Telnet: bbs.dmine.net:24
+                   E-mail: info at telnetbbsguide dot com
+ 
+                           THIS IS A FREE LIST
+            PLEASE DISTRIBUTE THIS LIST EVERYWHERE YOU SEE FIT!
+ 
+ 
+===========================================================================
+WHERE TO FIND THE BBS CORNER'S TELNET BBS GUIDE:
+ 
+WEB: https://www.telnetbbsguide.com
+ 
+BBS: Diamond Mine Online BBS
+ 
+Web:    http://www.dmine.com
+Telnet: bbs.dmine.net:24
+ 
+EMAIL:
+ 
+E-mail inquiries: info (at) telnetbbsguide (dot) com
+ 
+DISTRIBUTION LIST:
+ 
+If you want a copy of this list sent to you automatically once a
+month, subscribe to our distribution list. For details go to:
+https://groups.io/g/telnetbbsguide/
+ 
+NOTE:
+ 
+All Telnet BBS system listed are checked and verified
+every 30-60 days. If a BBS is down for more than 30 days,
+it will be removed from the list.
+ 
+If you find a BBS no longer in operation, please send an E-mail
+to the address listed above.
+ 
+This file can be downloaded from our website or
+your favorite BBS. File name for this month is IBBS0226.ZIP
+============================================================================
+ 
+* = NEW listing since last edition
+ 
+============================================================================
+   
+  0Day BBS                                 65.108.245.243
+  0xDECAFBAD BBS                           bbs.decafbad.com:6523
+  13th Floor BBS                           13th.hoyvision.com:6400
+  13th Leader BBS                          13leader.net:8023
+  1992 BBS                                 98.113.13.134:2323
+  20 For Beers BBS                         20forbeers.com:1337
+  300 F-ing Baud BBS                       300baud.dynu.net:2525
+  32-Bit BBS                               x-bit.org:23230
+  4 Wheel Ham BBS                          bbs.4wheelham.com
+  4D2 Dot Org                              bbs.4d2.org
+  64 Vintage BBS                           64vintageremixbbs.dyndns.org:6400
+  8-Bit Archive                            bbs.8-bitarchive.com:2223
+  8-Bit Boyz BBS                           bbs.8bitboyz.com:6502
+  8-Bit Playground                         8bit.hoyvision.com:6400
+  8Bit Club BBS                            bbs.8bitclub.com:6502
+  A-Net Online (Game Server)               game.a-net-online.lol:513
+  A-Net Online (Mystic)                    mystic-anet.online
+  A-Net Online (Spitfire)                  sf.a-net.online:2323
+  A-Net Online (Synchronet)                a-net.online
+  A-Net Online (TWGS)                      game.a-net-online.lol:2002
+  A-Net Online Beta BBS                    x.a-net.online:2323
+  A1 BBS                                   a1bbs.ddns.net
+  Abandoned StarDock TWGS                  abandonedstardock.ddns.net:2002
+  Absinthe BBS                             absinthebbs.net:1940
+  Abyss BBS                                bbs.abyssnode.net
+  Ace of Spades BBS                        chaotix.ddns.net:2323
+  Acid Underworld                          blackflag.acid.org:31337
+  Adept BBS TWGS                           adeptbbs.com:2002
+  Adept Online Entertainment               adeptbbs.com
+  Agency BBS                               agency.bbs.nz
+  Agon BBS                                 krion.io:1337
+  Agster                                   bbs.aghy.net
+  Aincrad BBS                              67.205.168.255:2323
+  Air & Wave BBS                           bbs.airandwave.net:2323
+  Al's Geek Lab BBS                        bbs.alsgeeklab.com:2323
+  Alamo BBS                                alamobbs.mywire.org:6400
+  AlcaBBS                                  bbs.alcatrash.org
+  Alcatraz Prison BBS                      alcatrazbbs.ddns.net:9000
+  Alcoholiday BBS (Mystic)                 alcoholidaybbs.com
+  Alcoholiday BBS (Renegade)               alcoholidaybbs.com:95
+  Ale's BBS                                manalejandro.com
+  Aleco Experience BBS                     bbs.alecoexp.cz
+  Aleph BBS                                alephbbs.com:2626
+  Alien Mindbenders BBS                    the.alienmindbenders.net
+  Alien Zone BBS, The                      66.188.66.37
+  Aliens' Alcove!                          newt.aliens.ph
+  Alltsk                                   fido.alltsk.ru
+  Alpha Centauri BBS                       acentauribbs.no-ip.org:2002
+  Alpha Complex                            www.alphacomplex.us:2523
+  Altair IV BBS                            altairiv.ddns.net:2323
+  Altair Mini BBS                          altairminibbs.net
+  Alterant BBS                             alterant.bbs.dege.au:123
+  Amiga CBM BBS                            amiganer.amms-bbs.de
+  Amiga City                               amigacity.xyz
+  Amiga Retro Brisbane BBS                 www.amigaretro.com
+  Amiga Retro V4SA BBS                     amibbs.amigaretro.com:6880
+  Amiga Underground                        amigaunderground.com:2300
+  Amis XE                                  amis86.ddns.net:9000
+  AMSTRAD BBS                              amstrad.simulant.uk:464
+  Analog Waffle                            waffle.c4bmore.com:2001
+  Androids Dungeon                         bbs.androidsdungeon.co.uk
+  Anduin BBS                               bbs.anduin.net
+  Animation Game Station (Animeyo)         54.238.90.108
+  Another Droid BBS                        andr01d.zapto.org:9999
+  Another F-ing BBS                        anotherbbs.dynu.net:1337
+  ANSITex                                  alterant.bbs.dege.au
+  Anti Earth Union Government (Chinese)    aeug.asuscomm.com:8888
+  Antidote                                 antidote.triad.se:64128
+  Antikitera                               technotron.asuscomm.com
+  Anybox BBS                               anybox.freedyndns.de
+  Aperture Science Employee Mainframe      rcfeed.concomcompany.com:31810
+  Arcadia BBS                              bbs.arcadiabbs.com
+  Archaic Binary                           bbs.archaicbinary.net
+  ArcticZone Online Entertainment          bbs.arcticzonebbs.net
+  ARDA-BBS.com                             arda-bbs.com
+  Area 52                                  area52.tk:5200
+  Arena BBS                                netasylum.com:2323
+  ARIA BBS HQ                              ariabbs.com:1985
+  ARTNET                                   50.116.51.149
+  AT2K Design BBS                          bbs.at2k.org
+* Atari BBS Gateway                        ataribbs.ddns.net:6502
+  Atari Portfolio BBS                      pofobbs.ddns.net:992
+  Atavachron BBS                           bbs.atavachronbbs.net
+  Athelstan BBS                            athelstan.org
+  Atlantis BBS                             atl.ddns.net:6401
+  Atmosphere BBS (NTU)                     bbs.as.ntu.edu.tw
+  Attic BBS (1)                            theattic.v1cd3m1z3r.net
+  Attic BBS (2)                            bbs.millhill.org:2323
+  Avalon                                   76.104.161.135
+  Avalon Isle BBS                          atl.ddns.net:6400
+  Avast! BBS                               avastbbs.servegame.com
+  Baba Yaga's BBS                          68.98.101.79
+  Back In Time                             backintime.ddns.net:6510
+  Back to the Future (SSH)                 bttfbbs.com:22
+  Backwood Realm BBS                       bwrbbs.ddns.net
+  Bahamut BBS                              bbs.gamer.com.tw
+  Barbaria (SSH)                           barbaria.norbus.com:22
+  Basement BBS                             basementbbs.ddns.net:9000
+  Bass Planet                              thebassplanet.com:64128
+  Baudville                                amis86.ddns.net:9000
+  Bayou BBS                                jayctheriot.com:6401
+  BBS Development                          bbsdev.net
+  BBS Gamer                                bbsgamer.ddns.net:2600
+  BBS GameTime (MajorBBS)                  freespeak.hopto.org:1337
+  BBS GameTime (Menu)                      freespeak.hopto.org
+  BBS GameTime (PCBoard)                   freespeak.hopto.org:233
+  BBS OldChat                              bbs.oldchat.ru
+  BBS Orreli                               bbs.orreli.net:45023
+  BBS Orreli TWGS                          bbs.orreli.net:2002
+  BBS Retrocampus                          bbs.retrocampus.com
+  BBS Tournament Wordle                    bbswordle.com
+  BBS.JasonWalker.ca                       bbs.jasonwalker.ca:2323
+  BBS.Telearena.us                         bbs.telearena.us
+  BCG-Box                                  bbbs.net
+  BCR Games Server                         bcrgames.com:31337
+  Bear's Den                               bbs.bearfather.net
+  BEER-ISAC BBS                            31.220.63.185:2323
+  Beiyou Forum                             bbs.byr.cn
+  Beryl BBS                                beryl.h-o-soft.com:2323
+  Big Jim's Secret Emporium                bbs.bigjim.ventures:6969
+  Big Rabbit BBS                           bunnybbs.tw
+  Big Time BBS                             bigtimebbs.net:2323
+  Big5 BBS                                 39.106.161.147
+  Biker Bob's Clubhouse                    bbsclubhouse.ddns.net:1040
+  BitPlane BBS                             wa7npx.org:2323
+  Bits & Bytes BBS                         bbs.bnbbbs.net:2023
+  Bitwoods RBBS-PC                         bitwoods.duckdns.org
+  Black Flag BBS                           blackflag.acid.org
+  Black Tower BBS                          blackflag.acid.org:26
+  BlackICE                                 blackice.bbsindex.de
+  Blacklight Underground                   acentauribbs.no-ip.org:2424
+  Blackstar BBS                            blackstar-bbs.servegame.com
+  Blood Stone                              wwiv.bsbbs.com:2323
+  BLOODBBS                                 blood.bbsn.us:2323
+  Blurred Vision                           bbs.novass.net:2323
+  Boar's Head Tavern                       byob.hopto.org:64128
+  BodaX BBS                                bbs.beardy.se
+  Boebertfeet                              66.228.38.176:52270
+  BoobTube                                 bbs.wz5bbs.com
+  Books Chess Server                       books.internetking.us:5000
+  Bookworm BBS                             bookworm.synchro.net:2323
+  Boot Factory 2K+                         bfbbs.no-ip.com:8888
+  Borderline BBS                           borderlinebbs.dyndns.org:6400
+  Bottomless Abyss BBS                     bbs.bottomlessabyss.net:2023
+  Brain Storm BBS (SSH)                    bsbbs.com.br:22
+  Brazi.net                                brazi.net
+  Brett Bender BBS                         207.90.251.241:2323
+  Brewery BBS                              thebrewery.servebeer.com:6400
+  Brian's Blog TWGS                        tw2002.briancmoses.com
+  Brigandine                               brigandine.org:9390
+  Brokedown Palace BBS                     palace.brokedownpalace.online:2323
+  Broken Bubble                            bbs.thebrokenbubble.com
+  BUEMA BBS                                bbs.buema.ch:2300
+  Bunker 3                                 75.242.168.227:8888
+  Butterfly BBS                            211.68.71.66
+  Byte Me BBS                              chat.hohimer.org:2323
+  ByteBarn BBS                             bbs.bytebarn.de:2300
+  C3BBS                                    c3bbs.retronetworking.org
+  C64 Pub                                  bbs.c64.pub
+  C64 Ultimate Club                        c64u.club:6400
+  Cabana Bar BBS                           bbs.cabanabar.net:11123
+  Cabin BBS, The                           thecabinbbs.com:6400
+  Camelot BBS                              camelotb.synchro.net
+  Canerduh BBS                             bbs.canerduh.com:23905
+  Capital Station BBS                      csbbs.dyndns.org
+  Capitol City Online BBS                  capitolcityonline.net
+  Capitol Shrill BBS                       capitolshrill.com
+  Captain's Quarters BBS II                cqbbs.ddns.net:6800
+  Casbah BBS                               casbah.goip.de:5354
+  Castle BBS                               47.46.52.130
+  Castle Rock BBS                          cedarvalleybbs.com:2424
+  Catpit BBS                               bbs.cis92.net
+  Cave BBS                                 cavebbs.homeip.net
+  CB2 Micro BBS                            email.qrp.gr:2323
+  Cbaxyz TWGS                              tdod.org:2002
+  CBBS/TN                                  cbbs.mitsaltair.com:8800
+  CCUW BBS                                 rtc.to
+  CCX BBS                                  bbs.ccxbbs.net
+  CedarValley BBS                          cedarvalleybbs.com:2525
+  CedarValley BBS 2                        cedarvalleybbs.com:2626
+  Cement City                              scenewall.bbs.io:4000
+  Censorship BBS                           122.199.12.99:8888
+  Central Ontario Remote (GameSrv)         centralontarioremote.net:1123
+  Central Ontario Remote (Mystic)          centralontarioremote.net
+  Central Ontario Remote (WWIV)            centralontarioremote.net:2300
+  Centronian BBS                           bbs.centronian.ca:6400
+  CENTRUM BBS                              bbs.ninthchevron.com.au
+* Chaotic Factor BBS                       174.169.223.236
+  Chatter BBS                              chat.korokorok.com:2323
+  Chimia BBS                               chimia.se:2323
+  Choice Core BBS (1st)                    1stchoicecore.co.nz
+  Choice Core BBS (2nd)                    2ndchoicecore.nz:1024
+  Choice Core BBS (4th)                    1stchoicecore.co.nz:1030
+  Choice Core BBS (6th)                    1stchoicecore.co.nz:1028
+  Christian Fellowship                     cfbbs.no-ip.com:26
+  Chrysalis Online Services TBBS BBS       chrysalisbbs.org:8888
+  CIRCL's BBS                              bbs.circl.lu
+  Citadel 64 BBS                           citadel64.thejlab.com:6400
+  Citrick BBS                              citlmbbs.synchro.net:2300
+  Cittadella BBS                           bbs.cittadellabbs.it:4001
+  City Of Angels BBS                       houseoftna.xyz
+  City on a Hill                           jamesmauler.net
+  City on the Edge of Forever              interzone.annexia.xyz:2002
+  CJ's Place                               cjsplace.thruhere.net
+  Clacker Works                            cw.qc.to:9000
+  Classic BBS                              board.classicbbs.net:9339
+  Classic Computing BBS                    bbs.classiccomputing.net
+  Clover Love (Chinese)                    segaa.net
+  Clube da Insonia BBS                     bbs.conf.eti.br
+  Clutch BBS                               clutchbbs.com
+  Coal Mine BBS                            84.104.78.157
+  CodeRed BBS                              coderedmud.servegame.com:2323
+  Cold Fusion BBS                          cfbbs.net
+  Cold Winter Knights                      bbs.coldwinterknights.net:8888
+  Colossus BBS                             bbs.qzwx.com
+  Commodore Image                          cib.dyndns.org:6400
+  Commodore Image II                       cib.dyndns.org:6401
+  Commodore Image III                      cib.dyndns.org:6402
+  Commodore Lounge                         107.143.22.194
+  Comms Nuts BBS                           203.38.121.134:2323
+  Company Citadel BBS                      www.companycitadel.us
+  COMPUTE!'s Gazette BBS                   64life.net:1983
+  Computer Express                         cebbs.costakis.org
+  Computer God                             cpugod.synchro.net
+  Concrete Roots                           concreteroots.servebbs.org
+  Constructive Chaos BBS                   conchaos.synchro.net
+  Constructive Chaos TWGS                  conchaos.synchro.net:2002
+  Convolution                              convolution.us
+  Cool David                               bbs.cooldavid.org
+  Cottonwood BBS                           cottonwoodbbs.dyndns.org:6502
+  Crack In Time BBS                        crackintimebbs.ddns.net:2323
+  CrappieCracker Online BBS                www.crappiecracker.com:2323
+  Crazy Eric's BBS                         bbs.crazyerics.com
+  Crazy Paradise                           cpbbs.de:2323
+  Crazy World BBS                          crazyworldbbs.com:2323
+  Crazy World Game Server                  crazyworldbbs.com:888
+  Crisis/Line BBS                          crisisbbs.net
+  CrNet BBS                                bbs.crnet.net:2323
+  Crusty Chicken TWGS                      69.4.62.151
+  Crypts BBS                               eow.lol:2377
+  Crystal Palace                           cptalker.com:9900
+  Crystal Set                              zl4kj.nz
+  Cyber Sword                              bbs.excalibursheath.com
+  Cyberia BBS                              sysgod.org:23000
+  Cyberspace BBS (Synchronet)              cyberspacebbs.net
+  Cyberspace BBS (Worldgroup)              cyberspacebbs.net:2323
+  Cyrellia BBS                             bbs.cyrellia.com
+  D0P3 BBS                                 bbs.intersrv.net
+  Danger Bay BBS                           dangerbaybbs.dyndns.org:1337
+  Dank Domain                              play.ddgame.us
+  Dark Game BBS                            darkgame.buanzo.org
+  Dark Realms                              bbs.darkrealms.ca
+  Dark Systems BBS                         bbs.dsbbs.ca
+  Dark Wastelands                          darkwastelands.com:8888
+  DarkAges BBS                             darkagesbbs.com
+  DarkForce! BBS, The                      darkforce-bbs.dyndns.org:1040
+  Darklevel                                darklevel.hopto.org:64128
+  DarkMatter's TWGS                        twgs.geekm0nkey.com
+  Darkwood BBS                             darkwood.ddns.net
+  DatGSguy BBS                             datgsguy.com:6502
+  Datotal                                  datotal.net:35723
+  Dave's BBS                               davesbbs.com
+  Dawn of Demise (Worldgroup)              tdod.org
+  Day Of The Tentacle                      dott.synchro.net:2424
+  Dead Carrier BBS                         the-rotten-core.strangled.net:2323
+  Dead Internet Society                    deadinternet.synchronetbbs.org
+  Dead Modem Society                       telnet.deadmodemsociety.com:1337
+  Deadbeatz BBS                            deadbeatz.org
+  Death Row BBS                            deathrow.servebbs.org:1001
+  Decades BBS                              decades.freeddns.org:6401
+  DeepSkies BBS                            bbs.deepskies.com:6400
+  Defile BBS                               50.110.169.17
+  Delta City BBS                           deltacity.se
+  Demigoth BBS                             bbs.demigoth.com
+  Demonsnet BBS                            demonsnet.com
+  Desert Rats Sanctuary TWGS               bbs.kn6q.org:2002
+  DHXY                                     dhxy.info
+  Diamond Mine Online (Synchronet)         sbbs.dmine.net:24
+  Diamond Mine Online (WWIV)               wwiv.dmine.net:2323
+  Didstopia BBS                            94.22.232.77
+  Digicom BBS                              bbs.digicombbs.com:2323
+  Digital Dial BBS                         digitaldial.homeunix.com:2300
+  Digital Distortion                       bbs.digitaldistortionbbs.com
+  Digital Dreams                           ddreams.synchro.net
+  Digital Lethargia BBS                    www.diglet.ca
+  Digital Post                             thedigitalpost.freeddns.org
+  Digital Rainbow                          bbs.digitalrainbow.info
+  Digital Warfare                          bbs.digital-warfare.net:1337
+  Dime BBS                                 alcoholidaybbs.com:94
+  Disconnected by Peer BBS                 bbs.disconnected-by-peer.at
+  Diskbox ][                               tag.diskbox2.net
+  Diskhoppers Palace BBS                   diskhopp.synchro.net
+  Distant Empires BBS                      bbs.distantempires.com:8023
+  Distortion                               d1st.org
+  DJ Dave BBS                              djdave.uk:8088
+  DLWX BBS                                 107.175.69.10:60023
+  DniproWave BBS                           bbs.net.ua
+  Dock Sud                                 bbs.docksud.com.ar
+  Dogtown BBS                              bbs.kiwi.net
+  Door Games Unlimited                     dgu.strangled.net
+  Doozy                                    doozy.thruhere.net
+  Dove Only                                casper.homeip.net
+* Downlink BBS                             downlinkbbs.com:2323
+  DownUnder BBS                            202.90.240.159
+  Dragon's Lair BBS                        dragon.vk3heg.net:6800
+  Dream Garden                             cd.csie.io
+  Dream Land BBS                           ccns.cc:3456
+  Dreamland BBS                            bbs.dreamlandbbs.org
+  Dreamline BBS                            din.asciiattic.com
+  DUAO BBS                                 hermes.okyler.com
+  Duensing Digital                         bbs.duensing.digital
+  Dumuzi BBS                               dumuzi.lykaina.com
+  Dundarach BBS                            dundarach.tplinkdns.com
+  Dungeon BBS                              59.167.142.49
+  Dura-Europos                             dura-bbs.net:6359
+  Dynamite BBS (1)                         dynamite.bbsing.com
+  Dynamite BBS (2)                         dynamite.synchronetbbs.org
+  Dyslexic Donkey                          dydo.erb.pw:1337
+  Eagle's Dare BBS                         bbsdoors.com
+  Eat My Shorts! BBS                       ems-bbs.com
+  Echo Base BBS                            96.27.249.221
+  Echo Chamber BBS                         echochamber.zapto.org:3640
+  Echoes BBS                               echoes.120v.ac
+  Eclipse BBS                              eclipsebbs.com
+  Efectolinux                              bbs.efectolinux.com
+  El Vicio                                 elvicio.net
+  Eldritch Clockwork                       eldritchclockwork.net
+  Electraphysics TWGS                      142.11.212.221
+  Electronic Chicken BBS                   bbs.electronicchicken.com
+  Elevator BBS                             162.212.158.202
+  Emerald Hill BBS                         bbs.emeraldhill.org
+  Emerald Valley                           bbs.emeraldvalley.net
+  Empire of the Dragon BBS                 bbs.eotd.com
+  EMU486                                   bbs.emu486.net
+  Enchanted BBS                            47.38.20.227
+  End Of The Line BBS                      endofthelinebbs.com
+  ENiAC 2.0 BBS                            eniacv2.net:1337
+  Enigma BBS                               enigma-bbs.com
+  Enterprise BBS                           enterprisebbs.ddns.net:1701
+  ERICADE Network                          the.ericade.net
+  Error 200 Tech BBS                       bbs.error200.tech:1337
+  Error 404 (TWGS)                         error404bbs.ddns.net:24
+  Error 404 BBS File Server                error404bbs.ddns.net:513
+  Error 404 BBS Phone Book                 error404bbs.ddns.net:419
+  Escape To Other Worlds                   etow.synchro.net
+  Eternal Domain BBS                       bbs.eternaldomain.net
+  Ethernet Gateway                         ethernetgateway.com
+  Euphoria BBS                             euphoria.mudinfo.net:8888
+  Exoplanet                                exoplanetbbs.net
+  Extreme BBS                              bayvillewireless.com
+  Extricate BBS                            bbs.extricate.org
+  Eye of the Beholder                      fido.beholderbbs.org
+  Eye of the Storm                         on.the.net.nz
+  Fading Black                             23.95.146.28:8282
+  Faith Collapsing BBS                     bbs.faithcollapsing.com:2323
+  Family BBS                               familybbs.ddns.net
+  Fatcats BBS                              fatcatsbbs.com
+  FDD1                                     fdd.one
+  Federation Apocalypse                    fedapoc.tel:2301
+  Fennec BBS                               50.116.41.177
+  Fercho BBS                               ferchobbs.ddns.net:2323
+  File Bank BBS                            tfb-bbs.org
+  Files 4 Fun BBS                          bbs.f4fbbs.com:2323
+  Fireball Express (VADV)                  vadv.fireballex.com:2323
+  Fireside BBS                             firesidebbs.com:23231
+  First Division                           158.174.185.101:1987
+  Flipnet                                  bbs.abbadabba.tech:4242
+  FlipperZero BBS                          bbs.gglab.cloud:2323
+  FlupH BBS                                fluph.zapto.org
+  Fluxpod Information Exchange             fix.no:24
+  FMRL                                     fmrl.throwbackbbs.com:2324
+  Fool's Quarter BBS                       fqbbs.synchro.net
+  Forem XE BBS                             foremxebbs.ddns.net:9999
+  Forgotten Memories                       dazexy.synology.me:52323
+  Forze BBS                                bbs.opicron.eu
+  Free Corner                              bbs.debonne.eu
+  Freeside BBS                             freeside.bbs.io
+  Freeway BBS                              freeway.vkradio.com
+  French Connection                        72.38.168.118:31023
+  Fria Bad BBS                             friabad.hopto.org:64128
+  Frozen Floppy BBS                        bbs.retrohack.se:64128
+  fTelnet Demo Server                      bbs.ftelnet.ca
+  Fuji Summit                              winnow.1q1.me
+  Funtopia BBS                             funtopia.synchro.net:3023
+  Furry Refuge                             bbs.furryrefuge.com
+  Fusion BBS                               pruffino.com
+  Future World II                          fw2.cnetbbs.net:6800
+  Futureland                               futureland.today
+  Galaxy 74 BBS                            galaxy74bbs.com
+  Game Master                              bbs.game-master.com
+  Gamenet BBS Network                      gamenet.synchronetbbs.org
+  Gate BBS (Synchronet)                    thegateb.synchro.net
+  Gate BBS (WWIV)                          thegateb.synchro.net:2424
+  GatorNet HQ BBS (Synchronet)             73.102.102.106
+  GCC-BBS                                  gcc-bbs.com
+  Geezer's Fido Hub                        mbse.gzrbbs.net:2320
+  Generation III Pot-D                     geniv.dyndns.org:150
+  Genetic-Point BBS                        g-point.tunk.org:500
+  GhostNet FTN Hub                         alphacomplex.us:2423
+  Gibson BBS                               83.211.28.80:2323
+  GigaBite BBS                             bbs.gigabite.se
+  GlitchNet                                glitchtech.top
+  Global Chaos BBS                         globalchaosbbs.com
+  Global Village BBS                       the.globalvillagebbs.net:2323
+  Gods69.com BBS                           92.91.25.209:2323
+  Golden Temple, The                       bbs.iswix.com:6800
+  Goldmine Community Door Game Server      goldminedoors.com:2513
+  Goof's Garage                            goofsgarage.com:6464
+  Goosenet BBS                             bbs.g00r00.com
+  Greenhead BBS                            bbs.greenhead.ca
+  Greywolf's Den                           greywolf.synchro.net
+  Grid BBS                                 80.189.184.12
+  Gridlock BBS                             gridlock.synchronetbbs.org
+  Grimoire BBS                             grimoirebbs.sytes.net
+  Grinches Realm, The                      tgr.freeddns.org
+  Ground Control BBS                       gcbbs.net:2323
+  Ground Zero BBS                          71.239.223.149:2323
+  Guardian of Forever                      guardian.synchro.net
+  Guru BBS                                 bbs.bajer.cz:32
+  Haciend El Bananas                       haciend.com:8821
+  Hackerforce BBS                          bbs.hackerforce.de:2323
+  Hackmeeting 0x1B BBS                     95.217.16.88:8888
+  Hagar's Helpline                         hagars.org.uk:24
+  Halcyon BBS                              halcyonbbs.scisweb.org
+  Halls of Valhalla BBS                    hovalbbs.com:2333
+  Ham Shack BBS, The                       hamshack.synchro.net
+  Happyland                                citadel.dc540.org:23230
+  Harbor BBS                               96.30.192.92
+  Hated Reality                            hatedreality.homeunix.net
+  Hawaii BBS Atari 8 Bit                   atari-bbs.zapto.org:8888
+  Hax0r's Palace                           telnet.unknownrealm.org
+  Heatwave                                 heatwave.ddns.net:9640
+  Heights BBS                              heightsbbs.heightspc.net:6860
+  Herbies BBS                              herbies-bbs.ddns.net:2323
+  Herbies BBS II                           herbies-bbs.ddns.net
+  Herbies BBS III                          herbies-bbs.ddns.net:2424
+  HeXed BBS                                hexedbbs.com:23999
+  Hidden BBS                               the-hidden.hopto.org:64128
+  Hidden Paradise                          hpbbs.dyndns.org
+  High Desert BBS                          highdesertbbs.ddns.net:6400
+  HispaMSX BBS                             bbs.hispamsx.org
+  Hobbit Empire                            bbs.hobbitempire.net:6501
+  Hobbit Station BBS                       wfido.ru:1234
+  Hobby Line! BBS                          hobbylinebbs.com
+  Hohimer BBS                              mail.hohimer.org:1336
+  Hold Fast BBS                            interzone.annexia.xyz:2323
+  Holodeck BBS                             ufpgc.com:2323
+  Hologram Computing BBS                   sbbs.hologramcomputing.net
+  Honey-At-Home                            31.133.0.38
+  Horizon BBS                              bbs.horizonbbs.org
+  House of Baud BBS                        houseofbaud.com:8888
+  Huanian Xiaoji                           literature.twbbs.io
+  HyNET BBS                                bbs.hyena.network
+  Hysteria BBS                             bbs.retrorewind.ca
+  IB-BBS                                   bbs.ibbs.be
+  ICARUS                                   44.31.91.213
+  Ice Castle BBS                           69.178.59.98
+  Illusionforge BBS                        illusionforge.rocks:6400
+  Imzadi Box                               box.imzadi.de
+  Inconsistency BBS                        66.228.57.87:2323
+  Infinite Dream BBS                       aws1.fmerino.com.br
+  Infonet BBS                              bbs.rclabs.com.br:2323
+  Inner Core                               sbbs.ricin.io
+  Insane Asylum BBS (1)                    tiabbs.synchro.net
+  Insomnia                                 insomnia.synchronetbbs.org
+  Integrated Telecommunications Centre     itcbbs.ddns.net:23000
+  Internal Dimension BBS                   bbs.idbbs.ca:59
+  Internetking's Tradewar 2002 Server      tw.internetking.us
+  Interstellar TWGS                        70.122.247.57:2002
+  Interzone                                bbs.interzone.cloud
+  Iowa Student Assc. BBS (ISCA)            bbs.iscabbs.com
+  IPTIA BBS (Synchronet)                   bbs2.ipingthereforeiam.com:2323
+  ISIS Unveiled                            isisunveiled.no-ip.org
+  Itchy Butt BBS (Color 64)                itchybutt.org:6502
+  Jacob's Hideout BBS                      bbs.jacobcat.app
+  Joe's Computer BBS                       joesbbs.com
+  Jolly Roger BBS, The                     bbs.thejollyrogerbbs.com:8023
+  JumpStart BBS                            exciter.ws
+  Jungle BBS (1)                           junglebbs.com
+  Jungle BBS (2)                           bbs.junglebbs.com
+  Jupiter                                  jupiter.bbs.io
+  Kalgoorlie Retro BBS                     bbs.theiguru.au:2323
+  Kats Alley                               tka.8bitboyz.com:6400
+  Kaypro BBS                               kayprobbs.org
+  KCM BBS System                           zahrl.ddns.net:2023
+  KD3net                                   bbs.kd3.us
+  KD8HFX                                   bbs.kd8hfx.net
+  KEEP BBS                                 thekeep.net
+  Kernel Fortress                          kernelfortress.org
+  Killed In Action BBS                     kia.zapto.org
+  Kilobyte                                 24.166.43.233
+  Kingdom's End BBS (Synchronet)           sbbs.kingdomsendbbs.net
+  Kirika BBS                               andcycle.idv.tw
+  KiwiMates                                96.231.233.47
+  KK4QBN BBS                               kk4qbn.synchro.net
+  Kludge BBS                               klud.ge
+  Korenblom                                bbs.korenblom.nl
+  Kraaby Gamer BBS                         kraaby.synchro.net
+* KRY.PT BBS                               kry.pt:2323
+  Kuehlbox                                 kuehlbox.wtf
+  Lab BBS, The                             bbs.dicksonlabs.net:2325
+  Lake House BBS                           lakehouse.lilpenguins.com:2333
+  Land of Frogs and Contemplation          lofac.mintyfresh.love
+  Land of the Lost                         landofthelost.ca:2300
+  Landover BBS                             landover.synchronetbbs.org
+  Last Rangers' BBS                        lastrangers.com
+  LateNight DiversiDial                    latenight.diversidial.com:313
+  Lee Magazine                             sgprobbs.com:1337
+  Lehigh Valley Vintage Computer Club      bbs.lightly-salted.com:8023
+  Leisure Time BBS                         bbs.riddells.net:10023
+  Level 29                                 bbs.fozztexx.com
+  Lexicon BBS (Image BBS)                  lexiconbbs.com:6400
+  Liane BBS                                bbs.vslib.cz
+  Lilac Community BBS                      lilacbbs.com
+  Liquid Digital                           98.212.225.126
+  Live Wire BBS                            livewirebbs.com:1025
+  Local Yocal BBS                          localyocalbbs.com
+  Looney Bin BBS!                          looneybinbbs.com:2023
+  Lord Raptor's Domain                     150.221.218.212
+  Lord.stabs.org                           lord.stabs.org
+* Lost Cause Halfway House                 bbs.lostcause.house
+  Lost Caverns BBS                         tlcbbs.dynu.net:6400
+  Lost Chord BBS (Commodore BBS)           tlcbbs.synchro.net:6400
+  Lost Chord BBS (Searchlight BBS)         tlcbbs.synchro.net:6023
+  Lost Chord BBS (Synchronet BBS)          tlcbbs.synchro.net
+  Lost Crypt BBS                           bbs.lostcrypt.com
+  Lostways BBS                             98.144.7.205
+* Love Of Net Endless (Chinese)            bbs.qeeai.com
+  LowCrash DEV BBS                         bbs.lowcrash.dev:8888
+  LSNET Archive                            bbs.lsnet.dev
+  Lunar Mod                                bbs.beanzilla.net:2323
+  Lunar Outpost                            lunarout.synchro.net:8023
+  Lunatics Unleashed BBS                   lunaticsunleashed.ddns.net:2333
+  LV-426                                   lv426bbs.hopto.org:6464
+  Lytical HackFund BBS                     134.209.40.1:31337
+  M. Station                               mstation.servebbs.com
+  M0n.de BBS                               172.105.27.143
+  Machdyne BBS                             206.189.226.31
+  Made To Raid                             bbs.madetoraid.com:2323
+  Madman with a Blue Box                   madmanbbs.ddns.net
+  MadWorld BBS                             www.madworldbbs.com:52146
+  Magic Systems                            bbs.magicbbs.eu:6323
+  Magnum BBS                               magnumbbs.net
+  Maiks Place BBS                          bbs.maik.ch:2323
+  Major Mudd                               majormud.gotdns.com
+  MajorBBS Official Demo BBS               bbs.themajorbbs.com
+  ManetherenWG                             24.131.193.139
+  Maniac Zone                              tmz.synchronetbbs.org
+  Mark Van Daele's TWGS                    game.tw2002.net
+  Master Boot Record                       mbrserver.com
+  MasterCom                                bbs.sunspothq.dyndns.org
+  Mastodon                                 mastodon.uy
+  MaxBBS                                   maxbbs.ddns.net:24023
+  Mbpeikert                                mbpeikert.ddns.net
+  MBSE Professional Dev BBS                phoenix.bnbbbs.net:2323
+  Medusa BBS                               medusagaming.ca:230
+  Mega BBS Public BBS System               themegabbs.com:6400
+  Megadodo Publications                    megadodo.online:4242
+  Memphis TW BBS                           bbs.memphistw.org
+  Memphis TW TWGS                          bbs.memphistw.org:2002
+  Metal Zone                               tmzbbs01.synchro.net
+  Metro Olografix                          bbs.olografix.org
+  MicroBlaster TWGS                        microblaster.net:2002
+  Microtown BBS                            microtownbbs.com:6400
+  Midnight Lounge                          67.149.17.69
+  Mimac Rebirth                            mimac.bizzi.org:2323
+  Missing Links                            mlinks.com
+  Miya Net                                 miyanet.moe
+  Mizuki Community (Newsmth BBS)           bbs.newsmth.net
+  MMN                                      66.55.66.25
+  Modemo Tider                             modematider.selstam.nu:50023
+  Modern Retro, The                        173.217.78.103:2323
+  Moe's Tavern                             moetiki.ddns.net:27
+  Mojo's World BBS                         mojo.synchro.net
+  Monochrome                               mono.org
+  Monterey BBS                             montereybbs.com
+  Montreal Greek Times BBS                 bbs.greektimes.ca
+  Moon Base Alpha (TWGS)                   mba.dnsalias.com:2002
+  Moon Base Alpha (VADV)                   mba.dnsalias.com
+  MorningSide Mortuary                     mortuary.ddns.net
+  Mousenet                                 bbs-mousenet.dynip.online:8889
+  Mouth of Hell BBS                        mouthofhell.duckdns.org
+  Mozy's Swamp and Red Dwarf BBS           bbs.mozysswamp.org
+  Mozy's Swamp and Red Dwarf TWGS          bbs.mozysswamp.org:24
+  MSmac BBS                                msmacbbs.maletazul.pt
+  MtlGeek (Synchronet)                     mtlgeek.synchro.net
+  MtlGeek (TWGS)                           mtlgeek.synchro.net:2002
+  Muinet                                   muinet.com:2323
+  MULTINUBE-BBS                            multinube.net
+  Murphy BBS                               94.32.85.38:2023
+  Music Station                            home.bsrealm.net
+  Mutiny BBS (1)                           mutinybbs.com:2332
+  Mutiny BBS (2)                           mutiny.cigdangle.com:65023
+  Mutiny Community                         mutinybbs.com:2300
+  MV2K BBS                                 mv2k.com
+  My Retro Computer                        myretrocomp.com
+  Mysmth BBS                               bbs.mysmth.net
+  Mysteria Majicka BBS                     majicka.at2k.org:1955
+  Mystic Hobbies                           mystic-hobbies.com
+  Mystic Realms                            mysticrealms.ddns.net:11000
+  Mystic Rhythms BBS                       mystic.wwivbbs.org
+  Mystical Realm BBS                       mysticalrealmbbs.com
+  Mythical Kingdom Tech BBS                ice.lilacway.com:3000
+  Mythical Kingdom Tech SBBS               bbs.mythicalkingdom.com:5023
+  Nanyang Inn                              bbs.nykz.net
+  NE BBS                                   nebbs.servehttp.com:9223
+  NerdRage BBS                             nerdragebbs.ddns.net
+  Nervous Hospital                         thenervoushospital.com:1996
+  Nest BBS                                 188.81.201.94:2323
+  Netpoint BBS                             netpoint.webhop.me
+  Netpoint TWGS                            netpoint.webhop.me:2002
+  Nettwerked BBS                           nettwerked.synchronetbbs.org
+  NetVillage Sysop Community               96.231.233.50
+  Never Never Land BBS                     neverneverlandbbs.com:2323
+  New World of the Internet                209.141.35.127
+  News BBS                                 bbs.dosnetz.de:3232
+  Newton City                              bbs.newtoncity.org
+  Nexus BBS                                nexus.aefinity.io
+  Night Owl BBS                            nightowlbbs.ddns.net     :6400
+  Nightbite BBS                            nightbite.redirectme.net:2323
+  Nikom BBS                                bbs.nikom.org:2323
+* Nimbus BBS                               nimbus.synchronetbbs.org
+  Nine Worlds BBS                          thenineworlds.dnshome.de:923
+  Nite Eyes BBS                            bbs.lizardmaster.com
+  NiteLite BBS                             nitelite.ddns.net:9000
+  Nitro Store                              100.24.206.238
+  No Carrier BBS                           bbs.wehack.net
+  No Signal BBS                            217.154.107.144
+  Noise Forest BBS                         tnf.invisik.net
+  Non-Existant BBS                         184.99.51.34
+  Northern Palace                          thenorthernpalace.com:2020
+  NostalMania                              nostalmania.com
+  Nottingham BBS                           nottinghambbs.com:2323
+  Noverdu                                  noverdu.com
+  NoWhere TWGS                             joestavern.ddns.net:2002
+  Nuclear Club                             nuke.club:513
+  Nut Asylum (Mystic)                      xtcbox.org:2323
+  Nut Asylum (Wildcat)                     xtcbox.org
+  Oasis BBS                                oasisbbs.hopto.org:6400
+  Off The Wall                             offthewall.dmxrob.net
+  Oiran Alien Museum                       libido.cx
+  Old Highland Borg                        ohb.synchronetbbs.org
+  Old Net BBS                              theoldnet.com:6400
+  Old School BBS                           oldschool.synchronetbbs.org
+  Old Time BBS                             oldtimebbs.com
+  Old Time's Sake BBS                      otsbbs.ddns.net:2323
+  Oldest Future Object                     ofo.tw
+  Onix BBS                                 onixbbs.servebbs.com:2525
+  Onyx                                     185.139.32.178
+  Operation Ivy BBS                        opivy-bbs.com
+  Optical Illusion BBS                     optical.c64bbs.nu:64128
+  OPTO 22 BBS                              bbs.opto22.com
+  Orchestra BBS                            sacrebase.mywire.org:486
+  Oshaboy BBS                              top-swadba.de:2323
+  Outer Limits, The                        outerlimitsbbs.duckdns.org
+  Outer Wall, The                          outerwall.net
+  Outpost 9 (BBS)                          bbs.outpost9.co:2023
+  Outpost 9 (TWGS)                         tradewars.outpost9.com:2002
+  Outpost BBS                              bbs.outpostbbs.net
+  Outta Control Hackers TWGS               76.242.166.61:2002
+  Outta Control MajorBBS                   76.242.166.61
+  Outwest BBS                              outwest.synchro.net
+  Overfit                                  overfit.retrievo.xyz:8023
+  P.U.L.S.E. BBS World HQ                  pulsebbs.hopto.org:1984
+  Paladium BBS                             paladium.servebbs.com:20
+  Palantir BBS                             palantirbbs.ddns.net
+  PapiChulo's MajorBBS                     75.31.92.35
+  Paradox BBS (1)                          paradoxbbs.synchronetbbs.org:513
+  Paradox BBS (3)                          paradoxbbs.qc.to:57323
+  Parasite                                 www.kimmoviitanen.fi:2323
+  Part-Time BBS                            ptbbs.ddns.net:8000
+  Particles! BBS                           particlesbbs.dyndns.org:6400
+  Party Bowl BBS                           partybowlbbs.ddns.net:2323
+  Path Unknown BBS                         pathunknown.net
+  Pebkac.lol                               pebkac.lol
+  Penalty Box BBS                          thepenaltybox.org
+  Pepzi BBS                                pepzi.eu
+  Performance Leasing Systems              97.76.12.194
+  Personal Home Cloud                      75.26.216.248:24
+  Pesto BBS                                bbs.pewp.us
+  Petit Caillou BBS                        bbs.jayscafe.net:6402
+  Phantasm                                 phantasm.bbs.io:4489
+  Phantom BBS                              bbs.phantombbs.info:2323
+  Pharcyde BBS                             bbs.pharcyde.org
+  Phaseshift                               phased.port0.org:2323
+  Phatstar Teleporter                      198.71.48.13:7777
+  Phoenix BBS                              phoenix.bnbbbs.net
+  Phospher BBS                             bbs.phospher.com
+  PhreakNet                                bbs.phreaknet.org
+  PipeLine BBS                             bbs.wantit.net
+  Piranha BBS                              blackflag.acid.org:27
+  Pirate's Cove TWGS                       38.188.130.43
+  Pixelgrounds BBS (Enigma 1/2)            bbs.pixelgrounds.net:8888
+  Pixelgrounds BBS (Worldgroup)            bbs.pixelgrounds.net:8887
+  Planet Afr0                              planetafr0.org:8888
+  Plasma Sphere BBS                        84.92.196.99
+  Play LORD                                playlord.org
+  PlayMajorMUD.com                         playmajormud.com
+  PlayPen BBS                              playpenbbs.com
+  PMF BBS                                  bbs.venerandi.it
+  Poignant Beacon (Pharos BBS)             bbs.pharos.rocks
+  Port of Call BBS (Renegade)              pocbbs.duckdns.org
+  Port of Call BBS (Synchronet)            pocbbs.duckdns.org:2323
+  Power BBS                                bbs.powerbbs.com
+  Pro-Kegs                                 proline.ksherlock.com:6523
+  Protoweb BBS                             45.79.37.227
+  Proud Pirates Cove                       ppc.synchro.net
+  PSC BBS                                  psc.servebeer.com:6870
+  Psycho Ward                              bbs.8yo.biz:5150
+  Public Electronic Networked Information System penisys.online:6502
+  QL Dump                                  001english-eu.no-ip.biz
+  Quantum Rift                             bbs.virtualoak.net
+  Quantum Wormhole, The                    bbs.erb.pw
+  Quazar BBS Door Game Server              quazarbbs.dynu.net:2523
+  Quest for Zen                            96.231.233.46
+  Quest TWGS                               thequesttwgs.game-host.org
+  Radio Freaks & Geeks                     radiostream.amigaz.org:2323
+  Ragnarok's BBS                           186.189.236.69:23021
+  Raiders Inc. BBS                         raidersbbs.zapto.org:1337
+  Ralser Lab BBS & BBSradio                euklid.ddns.net:5745
+  RAMifications                            bbs.ramifications.ca:5128
+  RapidFire                                rapidfire.hopto.org:64128
+  Rats Den BBS                             bbs.catracing.org:6400
+  Raven of the Storm                       50.20.127.213
+  Raveolution                              raveolution.hopto.org:64128
+  Rayzer's BBS                             mail.hohimer.org:1336
+  RayzerNET BBS                            connect.rayzer.net:2112
+  Razz Pie BBS                             razzpie.ddns.net:2300
+  RBB Systems Int'l                        rbb.fidonet.fi:32
+  RC-BOX                                   rc2014.ddns.net:2014
+  Realitycheck BBS                         realitycheckbbs.org
+  Realm BBS                                therealm.synchro.net
+  Realm of Darkness                        bbs.trod.org
+  Realm of Serion                          connect.serionbbs.com
+  Realm of the Wizard's Lair               bbs.b-wells.us
+  Red Dragon BBS                           108.52.154.224
+  Region 15 HQ                             region15.net
+  Reid BBS                                 192.227.222.151:6400
+  Reign of Fire                            call.rofbbs.com:6800
+  Reign of Fire II                         call.rofbbs.com:6400
+  Reign of Fire III                        call.rofbbs.com:8502
+  Reticulum Ace                            bbs.acehoss.net
+  Retro Archive                            bbs.retroarchive.org
+  Retro Running BBS                        retrorunning.ddns.net:8880
+  Retro Unboxers                           flashbackbbs.sytes.net:6502
+  Retro16 BBS                              mail.drf-solutions.net
+  Retro32 BBS                              bbs.retro32.com:1337
+  Retroaktiv BBS                           retr0aktiv.com
+  RetroBoard BBS                           bbs.retroboardbbs.com:2323
+  Retroconnect                             retroconnect.org
+  RetroDigital BBS                         rdnetbbs.com
+  Retrogaming Activities                   react-bbs.nikoh.it:2323
+  Retrograde BBS                           rtg.dyndns.biz:6428
+  Retrograde II BBS                        cib.dyndns.org:6404
+  RetroLair BBS                            retrolair.amigaretro.net:6800
+  RetroNet Neo                             retronetneo.synchronetbbs.org
+  RetroSwim BBS                            ezycom.retroswim.net:2323
+  Reverse Polarity                         revpol.lovelybits.org:1337
+  Ricks BBS                                ricksbbs.synchro.net
+  Rise N' Shine BBS                        rns.risenshinebbs.com
+  River Styx BBS                           riverstyx.ddns.net:2323
+  RMSBBS                                   linuxdoc.no-ip.org
+  Rock BBS III                             therockbbs.net:10023
+  Roon's BBS                               bbs.roonsbbs.hu:1212
+  RougeNet BBS                             bbs.roguenet.work:8888
+  Roughneck BBS                            host.roughneckbbs.com
+  Rougue BBS (Chinese)                     35.201.128.35
+  Rusty Mailbox                            trmb.ca:2030
+  SA Vintage Computer Community BBS        bbs.vcgsa.co.za
+  Sanctuary BBS                            sanctuary.zapto.org:1541
+  Sanctum II BBS (1)                       sanctumbbs.com
+  Sanctum II BBS (2)                       sanctumbbs.com:6502
+  Sandnes BBS                              stokmarknes.org:24
+  Sands of Time                            162.243.54.214
+  Santronics R&D Beta Site                 3.132.92.116:24
+  Santronics Software                      online.winserver.com:24
+* Saturn 5                                 99.85.80.17
+  SBB Systems                              bbs.sbbsystems.com:8888
+  Scene List (1)                           scenelist.org
+  Scene List (2)                           87.212.201.57:4000
+  Scooby's Doo BBS                         scoobysdoo.ddns.net:2023
+  Scratched Reality                        reality.throwbackbbs.com:2323
+  SD2IEC Test BBS                          cib.dyndns.org:6403
+  SDF-1 BBS                                bbs.sdf1.net:5023
+  Sea Breeze Gaming Network (TWGS)         seabreeze.servegame.com:2002
+  Sea Breeze Gaming Network (Worldgroup #2) seabreeze.servegame.com:32
+  Sea Breeze Gaming Network (Worldgroup)   seabreeze.servegame.com
+  Sea of Fantasy                           seaoffantasy.synchronetbbs.org
+  Seattle BBS (Chinese)                    seattle.tw
+  Section 31 TWGS                          sector31.lorfinglab.com:2002
+  Section One BBS                          71.254.52.98
+  Shadow BBS                               shadowbbs.com
+  ShadoWorks BBS                           bbs.shadoworks.net
+  Shadowscope                              shadowscope.noip.us
+  ShadowThrone                             109.247.190.78:2323
+  Shamrock BBS                             104.246.170.121
+  Shenk's Express                          shenksxp.dyndns.org
+  Shift-Bits BBS                           bbs.shift-bits.com:2000
+  Shipwrecks & Shibboleths                 shibboleths.org:800
+  Shodan's Core                            shodanscore.com:8086
+  Shurato's Heavenly Sphere                shsbbs.net
+  Silent Node BBS                          silentnode.ddns.net:6400
+  Silfen Path BBS                          bbs.silfenpath.com
+  SiliconUnderground                       siliconu.com
+  Silverhawk BBS                           bbs.silverhawk.no:6400
+  Sinclair Retro BBS                       retrobbs.sinclair.homepc.it
+  Sinner's Heaven                          207.246.74.70
+  Skara Brea                               80.7.90.17:31337
+  SKO BBS                                  134.185.84.52:2323
+  Skynet BBS (1)                           47.25.173.251
+  Skynet BBS (2)                           bbs.skynetbbs.com:20023
+  Slackers BBS                             slackers.ovh:2323
+  Slasher BBS                              162.118.68.104
+  Slime City BBS                           bbs.retrohack.se
+  SlipStream BBS                           slipstreambbs.net
+  Snobsoft BBS                             snobsoft.de:6401
+  Soft Solutions                           bbs.softsolutions.net.br:2023
+  Solarflow BBS                            solarflow.dynu.net
+  Sorcerors Isle                           96.231.233.53
+  Sotano MSX BBS                           sotanomsxbbs.org
+  Sounds of Silence BBS                    sos-bbs.net
+  South Central                            southcentral.se:1023
+  SouthEast Star                           sestar.synchro.net
+  Southern Amis                            southernamis.ddns.net
+  Spacemyte BBS                            34.162.43.84
+  Spaghetti Hut                            spaghettihut.amigaretro.net:6800
+  Spark Beer BBS                           bbs.spark.beer
+  Sparx BBS                                sparx.bbs.io
+  Splatter Haus                            splatter.haus:666
+  Sprawl BBS                               202.61.251.17
+  Squared Circle BBS                       45.79.93.198
+  Star Collision BBS                       scbbs.nsupdate.info:61023
+  Star Fleet HQ                            bbs.sfhqbbs.org:5983
+  Star Flight BBS                          stateoftheark.ca:1990
+  Star Killer's TWGS                       sk-twgs.com:2002
+  Star Mansion Returns                     66.23.221.29:2323
+  Starbase 11 BBS                          bbs.starbase11.de:2323
+  Starbase 21                              bbs.starbase21.net
+* Starbase Beta                            beta.sb-discovery.com
+* Starbase Discovery                       sb-discovery.com
+  StarDoc 134                              bbs.stardoc134.com:2323
+  Starship Junkyard                        bbs.starshipjunkyard.com
+  Steven's Hive BBS                        stevensbbs.stevenshive.xyz
+  Storm BBS                                telnet.stormbbs.com 
+* Storm Mountain TWGS                      storm-mountain.ddns.net:24000
+  Stormgate BBS                            stormgate.synchronetbbs.org
+  Strange Planet BBS                       strangeplanet.org:6800
+  Street Corner BBS                        streetcorner.ddns.net:6400
+  Strip It To Ride                         104.142.112.149:9000
+  Subcarrier BBS                           subcarrier.ignorelist.com:2323
+  Subhuman                                 subhuman.ddns.net:1338
+  Sugar Test BBS                           bbs.lizsugar.me:6000
+  Super Dimension Fortress (SDF-1)         sdf.org
+  Support BBS                              bbs.ddybing.no:1223
+  Surf Shop BBS (1)                        ssbbs.ddns.net:6510
+  Sursum Corda TWGS                        sursum-corda.com:2002
+  Sursum Corda! BBS                        sursum-corda.com
+  Swap BBS                                 dose.0wnz.at
+  SWATS BBS                                swatsbbs.ddns.net:2323
+  Swedish User Group Of Amiga              suga.se:42512
+  Swifty BBS                               bbs.swiftycode.ca:2323
+  SwissIRC BBS                             bbs.swissirc.net
+  Swords Of Chaos Forever BBS              bbs.soc4ever.com
+  Synchronix                               nix.synchro.net
+  Synerchat                                synerchat.com
+  Sysop Solaris Dot Com (Menu)             sysopsolaris.ddns.net:2323
+  System One BBS                           cib.dyndns.org:6491
+  T0kerz Hut                               t0kerZ.ddns.net
+  Taco Pronto                              tacopronto.bbs.io
+  TARDIS 64                                bbs1.tardisbbs.com:6411
+  TARDIS BBS                               bbs.cortex-media.info
+  TARDIS PRO                               bbs1.tardisbbs.com:8023
+  Tassie Bob BBS                           bbs.tassiebob.com:2323
+  Technoanarchy                            technoanarchy.synchronetbbs.org
+  Techrono BBS                             techrono.synchro.net
+  Techware                                 bbs.techware2k.com
+  TelBox                                   telbox.net
+  Telehack                                 telehack.com
+  TelnetBible.com                          telnetbible.com:6400
+  Terminal Obsession                       terminal-obsession.hopto.org:1541
+  Terminal Tavern                          bbs.terminaltavern.com
+  Terra Brasilis                           tbrasilis.ddns.net:23000
+  Terran Empire                            terranempire.ddns.net:1071
+  This Old Cabin (English)                 bbs.thisoldcabin.net:6464
+  This Old Cabin (Swedish)                 bbs.thisoldcabin.net:2323
+  Thrace BBS                               bbs.tabakov.net:13023
+  Three Blind Mice                         threeblindmice.synchronetbbs.org
+  Throwback BBS                            bbs.throwbackbbs.com
+  Thunder BBS                              149.56.47.118:1023
+  Thunder-Line BBS                         thunder.synchro.net
+  Thunderbolt BBS                          wx4qzbbs.ddnsfree.com:49815
+  Tigernet BBS                             tigernet.dewindt.us
+  Time Air BBS                             clients.renebates.com
+  Time Warp BBS                            twb.wrgnbr.com:6896
+  Time Warp of Future                      time.synchro.net:24
+  Timelord BBS                             teehill.adirondackpc.com:2020
+* Tingtao (Chinese)                        bbs.tingtao.net
+  Titantic BBS Telnet, The                 ttb.rgbbs.info
+  TLH Vintage BBS                          73.42.12.93
+  Tomato Place                             bbs.tomato.place:8888
+  Tommy's Holiday Camp                     vintage.thcbbs.com
+  Too Lazy BBS                             toolazy.synchro.net:2323
+  Tool Shed                                toolshed.synchro.net:2323
+  Toxic Laboratory BBS                     toxicbbs.com
+  TQPS                                     tqps.ddns.net
+  Trade Wars Academy TWGS                  tradewarsacademy.com:2002
+  Transfer Interruped BBS                  news.belchi.org:2323
+  Tsinghua Univ. (Fengqiao Stn.)           bbs.cs.nthu.edu.tw
+  TuxedoCat Lounge                         bbs.tuxedocatbbs.com:2323
+  TW Lounge BBS                            bbs.twlounge.net
+  Twilight Zone                            tzone.nxly.org:5000
+  Twixed BBS                               twixed.net:62323
+  Two Girl BBS                             bbs.2girl.net
+  Ultimate World Online BBS                67.163.148.95
+  Uncensored!                              uncensored.citadel.org
+  Uncomfortable Business                   bbs.uncomfortable.business:6423
+  Undercurrents BBS                        undercurrents.io:8088
+  Undermine BBS                            bbs.undermine.ca
+  Undernet BBS                             undernet.uy
+  Unicyber BBS                             bbs.unicyber.co.uk:2323
+  Unix-Bit BBS                             x-bit.org:1336
+  Unknown Realm (Mystic)                   turealm.no-ip.org:3023
+  Unknown Realm (PCBoard)                  turealm.no-ip.org:2323
+  Unleashed BBS                            www.unleashedinet.org
+  UORealms BBS                             bbs.uorealms.com
+  US 99 BBS                                bbs.quinnnet.org
+  UserClub BBS                             userclub-bbs.com
+  USS Excelsior BBS                        excelsiorbbs.ddns.net:2000
+  Util's Retro BBS                         retro.setsuid.net:8221
+  Uzi Suicide                              uzisuicide.servebbs.org
+  V01d C1ph3r                              bbs.canerduh.com:23056
+  Vague BBS                                vague.ddns.net
+  Valley BBS (2)                           valley64.com:6400
+  Vault BBS                                thevaultbbs.ddns.net:2323
+  Veleno BBS                               velenobbs.net
+  Verify-Nebula                            verify-nebula.kicks-ass.net
+  Vern BBS                                 vern.cc
+  Vertrauen                                vert.synchro.net
+  Video Game Nirvana                       173.90.55.126
+  Violeti BBS                              violetyggdrasil.live:1144
+  Viper BBS, The                           theviperbbs.ddnsfree.com
+  Viper's Pit TWGS                         sk-twgs.com:2002
+  VK7HDM's BBS                             workstation.ddmcomputers.com.au:2323
+  Vodnet BBS                               my-workspace.us:6764
+  VOID BBS                                 voidbbs.com
+  Vortex BBS (1)                           vortexbbs.com
+  WABAC Machine BBS                        wabac.ccsnet.com
+  Wall BBS                                 99.53.196.18
+  War Ensemble BBS                         warensemble.com
+  Wastelands BBS                           wastelands-bbs.net:2323
+  Wastelands BBS II                        wastelands-bbs.net
+  Weather Station BBS                      bbs.weather-station.org
+  Weed Net                                 weednet.synchronetbbs.org
+  Westland BBS                             bbs.korenblom.nl
+  Westwood BBS                             westwoodbbs.net:64738
+  Whisky Lover's Amateur Radio BBS         wd1cks.org
+  Who Dares Wins Amiga BBS                 whodareswinsbbs.uk
+  Wicked Garden BBS                        wgbbs.ddns.net
+  Wildcat Demo Server                      demo.winserver.com:24
+  Wildcat's Castle BBS                     bbs.wccastle.net:2424
+  Willamette Apple Connection (WAC) BBS    wacbbs.ddns.net:6502
+  Willow Creek BBS                         willowcreekbbs.dynu.net:6400
+  Wintermute BBS                           wintermutebbs.ddns.net
+  Wizard's Castle                          wccastle.synchro.net:24
+  Wizard's Rainbow                         wizardsrainbow.com
+  Wizzy BBS                                wizzybbs.win
+  WORD BBS                                 wordbbs.hopto.org:64128
+  Worlds Apart (TWGS)                      tw.worldsapart.net:2002
+  Wormhole II BBS                          wh2bbs.us:2321
+  Wreck Hall                               bbs.wreckhall.net
+  Wretched Beagle BBS                      bbs.wretchedbeagle.com
+  Wrong Number ][ BBS                      wn2.wrgnbr.com
+  Wrong Number ][ BBS Retro 1993!!         wn6.wrgnbr.com:6411
+  Wrong Number ][ V2.0                     cib.dyndns.org:6405
+  Wrong Number ]I[ BBS                     wn3.wrgnbr.com:6400
+  Wrong Number IV BBS                      wn4.wrgnbr.com:3000
+  X-Bit BBS                                x-bit.org
+  X/84 BBS                                 1984.ws
+  X65.zone BBS                             bbs.x65.zone:8888
+  Xibalba                                  xibalba.l33t.codes:44510
+  Yak Station BBS                          bbs.mycrowd.ca
+  YOUR SYSTEM NAME HERE                    50.47.85.64
+  Zelch BBS                                coffeemud.net:6502
+  ZenBBS                                   zen.kawasu.wtf
+  Zenolab                                  zenolab.synchro.net
+  ZeroTwo's BBS                            bbs.zerotwo.tech
+  Zeus BBS                                 192.243.111.121:2323
+  Zone BBS                                 zonebbs.net
+  Zooropa BBS                              52.4.41.44:2323
+  Zot TWGS                                 tw2002.zot.org:2002
+  Zruspa's BBS                             bbs.zruspas.org 
+ 
+--------------------------------------------------------------------------
+ 
+Added in the past 30 days: 12
+TOTAL SYSTEMS LISTED     : 991
+ 
+[END OF LIST]

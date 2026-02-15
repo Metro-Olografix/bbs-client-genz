@@ -1,0 +1,21 @@
+# Binari
+bbsclient
+*.exe
+*.app
+
+# Build artifacts
+build/bin/
+
+# Downloads e logs
+downloads/
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo

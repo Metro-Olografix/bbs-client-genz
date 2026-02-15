@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBS Client for Gen-Z</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- ═══ TOOLBAR ═══ -->
+    <div id="toolbar">
+        <!-- Riga 1: BBS select + host + port + connetti/hangup -->
+        <div id="toolbar-row1">
+            <select id="bbs-select" title="Scegli una BBS dalla lista">
+                <option>Caricamento...</option>
+            </select>
+            <label class="field-label">Host:</label>
+            <input id="host-input" type="text" value="bbs.olografix.org" placeholder="host" spellcheck="false">
+            <label class="field-label">Porta:</label>
+            <input id="port-input" type="number" value="23" min="1" max="65535">
+            <button id="btn-connect" class="btn btn-connect">CONNETTI</button>
+            <button id="btn-hangup" class="btn btn-red" disabled>HANG UP</button>
+            <div class="spacer"></div>
+            <button id="btn-log" class="btn" title="Carica un file di log sessione">LOG</button>
+            <button id="btn-font" class="btn btn-font" title="Cambia font: IBM VGA / VT323">IBM VGA</button>
+            <button id="btn-clear" class="btn" title="Pulisce lo schermo">PULISCI</button>
+            <button id="btn-upload" class="btn btn-green" title="Upload file via ZMODEM" disabled>UPLOAD</button>
+            <button id="btn-about" class="btn btn-info" title="About">i</button>
+        </div>
+    </div>
+
+    <!-- ═══ TERMINALE ═══ -->
+    <div id="terminal-container">
+        <canvas id="terminal" tabindex="0"></canvas>
+    </div>
+
+    <!-- ═══ STATUS BAR ═══ -->
+    <div id="statusbar">
+        <span id="status-text">Alt-Z for Help │ ANSI │ Telnet │ Pronto</span>
+    </div>
+
+    <!-- ═══ ZMODEM PROGRESS OVERLAY ═══ -->
+    <div id="zmodem-overlay" class="hidden">
+        <div id="zmodem-dialog">
+            <div id="zmodem-title">ZMODEM Download</div>
+            <div id="zmodem-file">File: —</div>
+            <div id="zmodem-bar-container">
+                <div id="zmodem-bar"></div>
+            </div>
+            <div id="zmodem-bytes">0 / 0 bytes</div>
+            <div id="zmodem-speed">Velocità: — KB/s</div>
+            <div id="zmodem-eta">ETA: —</div>
+            <button id="btn-zmodem-cancel" class="btn btn-red">ANNULLA</button>
+        </div>
+    </div>
+
+    <!-- ═══ ABOUT OVERLAY ═══ -->
+    <div id="about-overlay" class="hidden">
+        <div id="about-dialog">
+            <div class="about-border">══════════════════════════════</div>
+            <div class="about-title">BBS Client for Gen-Z v0.4.0</div>
+            <div class="about-border">══════════════════════════════</div>
+            <div class="about-body">
+                Creato da:<br>
+                Stefano "NeURo" Chiccarelli<br><br>
+                Vibe codato con Cowork<br><br>
+                Dedicato alla Metro Olografix<br>
+                e a tutti i Gen-Z
+            </div>
+            <div class="about-border">══════════════════════════════</div>
+            <button id="btn-about-close" class="btn">CHIUDI</button>
+        </div>
+    </div>
+
+    <script src="/src/main.js"></script>
+</body>
+</html>
