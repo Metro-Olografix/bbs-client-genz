@@ -179,11 +179,11 @@ function renderCursor() {
 
 async function updateScreen() {
     try {
-        const data = await window.go.main.App.GetScreen();
-        const cursor = await window.go.main.App.GetCursor();
-        cursorX = cursor.x;
-        cursorY = cursor.y;
-        renderScreen(data);
+        // BUG-010: singola chiamata IPC invece di GetScreen + GetCursor
+        const snap = await window.go.main.App.GetScreenSnapshot();
+        cursorX = snap.cursorX;
+        cursorY = snap.cursorY;
+        renderScreen(snap.cells);
     } catch (e) {
         console.error('updateScreen error:', e);
     }
@@ -221,6 +221,12 @@ function setupKeyboard() {
         }
 
         if (!connected) return;
+
+        // Ctrl+] → disconnetti (BUG-008)
+        if (e.ctrlKey && e.key === ']') {
+            await window.go.main.App.Disconnect();
+            return;
+        }
 
         // Ctrl+lettera
         if (e.ctrlKey && e.key.length === 1) {
@@ -349,7 +355,13 @@ function setupControls() {
     });
 
     // ZMODEM cancel
-    document.getElementById('btn-zmodem-cancel').addEventListener('click', () => {
+    document.getElementById('btn-zmodem-cancel').addEventListener('click', async () => {
+        // Annulla il trasferimento ZMODEM sul backend (se in corso)
+        try {
+            await window.go.main.App.CancelZmodem();
+        } catch (e) {
+            console.warn('CancelZmodem:', e);
+        }
         document.getElementById('zmodem-overlay').classList.add('hidden');
     });
 
@@ -573,7 +585,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
     ctx.font = `${FONT_SIZE}px ${currentFont}`;
     ctx.fillStyle = '#FFFF55';
-    ctx.fillText('BBS Client for Gen-Z v1.0.0 — Pronto', 10, 20);
+    ctx.fillText('BBS Client for Gen-Z v1.1.0 — Pronto', 10, 20);
     ctx.fillStyle = '#55FFFF';
     ctx.fillText('Seleziona una BBS e premi CONNETTI', 10, 44);
     ctx.fillStyle = '#555555';

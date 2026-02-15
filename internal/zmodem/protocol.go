@@ -66,9 +66,10 @@ const (
 	CANFC32 byte = 0x20 // CRC-32
 
 	// Limiti
-	MaxFileSize = 4 * 1024 * 1024 * 1024 // 4 GB
-	BlockSize   = 1024
-	MaxRetries  = 5
+	MaxFileSize  = 4 * 1024 * 1024 * 1024 // 4 GB
+	MaxBufSize   = 64 * 1024              // 64 KB — limite buffer receiver/sender (PT-002: anti-OOM)
+	BlockSize    = 1024
+	MaxRetries   = 5
 )
 
 // Bytes che devono essere escaped con ZDLE.

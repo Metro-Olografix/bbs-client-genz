@@ -78,6 +78,16 @@ func (s *Sender) StartUpload(path string) {
 		return
 	}
 
+	// SEC-008: verifica limite dimensione file
+	if info.Size() > MaxFileSize {
+		s.LogFunc(fmt.Sprintf("[TX] ERRORE: file troppo grande: %d > %d", info.Size(), MaxFileSize))
+		if s.OnError != nil {
+			s.OnError(fmt.Sprintf("File troppo grande: %d MB (max %d GB)",
+				info.Size()/1024/1024, MaxFileSize/1024/1024/1024))
+		}
+		return
+	}
+
 	s.Filepath = path
 	s.Filename = filepath.Base(path)
 	s.Filesize = info.Size()
@@ -99,6 +109,17 @@ func (s *Sender) Feed(data []byte) {
 	}
 	s.LogFunc(fmt.Sprintf("[TX] feed %dB state=%d buf=%d", len(data), s.State, len(s.buf)))
 	s.buf = append(s.buf, data...)
+
+	// PT-002: protezione OOM
+	if len(s.buf) > MaxBufSize {
+		s.LogFunc(fmt.Sprintf("[TX] SECURITY: buffer overflow (%d > %d), annullo", len(s.buf), MaxBufSize))
+		if s.OnError != nil {
+			s.OnError("Buffer overflow: dati non validi dal server")
+		}
+		s.Cancel()
+		return
+	}
+
 	s.processBuffer()
 }
 
@@ -245,6 +266,9 @@ func (s *Sender) sendZFile() {
 
 func (s *Sender) startSending(offset uint32) {
 	s.LogFunc(fmt.Sprintf("[TX] startSending offset=%d", offset))
+
+	// Chiudi eventuale file handle precedente (BUG-005: evita leak su retry/ZRPOS)
+	s.cleanup()
 
 	var err error
 	s.fileHandle, err = os.Open(s.Filepath)

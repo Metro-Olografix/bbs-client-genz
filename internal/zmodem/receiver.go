@@ -67,7 +67,7 @@ func NewReceiver(downloadDir string, sendFunc func([]byte), logFunc func(string)
 
 // Start avvia la ricezione ZMODEM con i dati iniziali.
 func (r *Receiver) Start(initialData []byte) {
-	os.MkdirAll(r.DownloadDir, 0755)
+	os.MkdirAll(r.DownloadDir, 0700)
 	r.State = RxInit
 	r.StartTime = time.Now()
 	r.buf = make([]byte, len(initialData))
@@ -90,6 +90,17 @@ func (r *Receiver) Feed(data []byte) {
 	}
 	r.LogFunc(fmt.Sprintf("[RX] feed %dB state=%d buf=%d", len(data), r.State, len(r.buf)))
 	r.buf = append(r.buf, data...)
+
+	// PT-002: protezione OOM — se il buffer supera il limite, annulla il trasferimento
+	if len(r.buf) > MaxBufSize {
+		r.LogFunc(fmt.Sprintf("[RX] SECURITY: buffer overflow (%d > %d), annullo", len(r.buf), MaxBufSize))
+		if r.OnError != nil {
+			r.OnError("Buffer overflow: dati non validi dal server")
+		}
+		r.Cancel()
+		return
+	}
+
 	r.processBuffer()
 }
 
