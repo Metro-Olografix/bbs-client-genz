@@ -17,6 +17,7 @@ const FONT_SIZE = 16; // fisso, come nel Python (IBM VGA 16pt)
 
 let canvas, ctx;
 let cellW = 0, cellH = 0;
+let dpr = 1; // devicePixelRatio per Retina
 let cursorOn = true;
 let cursorX = 0, cursorY = 0;
 let screenData = null;
@@ -26,7 +27,7 @@ let viewingLog = false;
 
 function initCanvas() {
     canvas = document.getElementById('terminal');
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d', { alpha: false });
     resizeCanvas();
     canvas.focus();
 
@@ -38,21 +39,35 @@ function initCanvas() {
 }
 
 function resizeCanvas() {
-    ctx.font = `${FONT_SIZE}px ${currentFont}`;
-    const metrics = ctx.measureText('M');
-    cellW = Math.ceil(metrics.width);
-    cellH = FONT_SIZE + 2;
+    dpr = window.devicePixelRatio || 1;
 
-    const w = cellW * COLS;
-    const h = cellH * ROWS;
-    canvas.width = w;
-    canvas.height = h;
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
+    // Misura le dimensioni reali dei caratteri a 1x
+    ctx.setTransform(1, 0, 0, 1, 0, 0); // reset transform
+    ctx.font = `${FONT_SIZE}px ${currentFont}`;
+    const testStr = 'M'.repeat(COLS);
+    const measuredW = ctx.measureText(testStr).width;
+    cellW = Math.round(measuredW / COLS);
+    cellH = FONT_SIZE;
+
+    // Dimensioni CSS (logiche)
+    const logicalW = cellW * COLS;
+    const logicalH = cellH * ROWS;
+    canvas.style.width = logicalW + 'px';
+    canvas.style.height = logicalH + 'px';
+
+    // Dimensioni fisiche del canvas (Retina: ×dpr)
+    canvas.width = logicalW * dpr;
+    canvas.height = logicalH * dpr;
+
+    // Scala il contesto per Retina
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    // Rendering pixel-perfect
+    ctx.imageSmoothingEnabled = false;
 
     // Clear
     ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(0, 0, logicalW, logicalH);
 
     // Ridisegna se ci sono dati
     if (screenData) {
@@ -60,40 +75,64 @@ function resizeCanvas() {
     }
 }
 
+// Helper: genera una chiave colore per confronto rapido
+function colorKey(r, g, b) {
+    return (r << 16) | (g << 8) | b;
+}
+
 function renderScreen(data) {
     if (!ctx || !data) return;
     screenData = data;
 
-    ctx.font = `${FONT_SIZE}px ${currentFont}`;
-    ctx.textBaseline = 'top';
+    // ── PASSO 1: Background ──
+    // Disegna background riga per riga, raggruppando celle con stesso colore BG
+    for (let y = 0; y < ROWS && y < data.length; y++) {
+        const row = data[y];
+        let x = 0;
+        while (x < COLS && x < row.length) {
+            const cell = row[x];
+            const bgKey = colorKey(cell.bgR, cell.bgG, cell.bgB);
+            let runLen = 1;
+            while (x + runLen < COLS && x + runLen < row.length) {
+                const next = row[x + runLen];
+                if (colorKey(next.bgR, next.bgG, next.bgB) !== bgKey) break;
+                runLen++;
+            }
+            const px = x * cellW;
+            const py = y * cellH;
+            ctx.fillStyle = `rgb(${cell.bgR},${cell.bgG},${cell.bgB})`;
+            ctx.fillRect(px, py, cellW * runLen, cellH);
+            x += runLen;
+        }
+    }
 
+    // ── PASSO 2: Testo ──
+    // Ogni carattere posizionato esattamente sulla griglia cellW×cellH
+    ctx.textBaseline = 'top';
+    let lastFont = '';
+    let lastFill = '';
     for (let y = 0; y < ROWS && y < data.length; y++) {
         const row = data[y];
         for (let x = 0; x < COLS && x < row.length; x++) {
             const cell = row[x];
+            const ch = cell.ch;
+            if (!ch || ch === ' ' || ch === '\u0000') continue;
+
             const px = x * cellW;
             const py = y * cellH;
 
-            // Background
-            ctx.fillStyle = `rgb(${cell.bgR},${cell.bgG},${cell.bgB})`;
-            ctx.fillRect(px, py, cellW, cellH);
+            // Cambia font solo se necessario
+            const font = `${cell.bold ? 'bold ' : ''}${FONT_SIZE}px ${currentFont}`;
+            if (font !== lastFont) { ctx.font = font; lastFont = font; }
 
-            // Character
-            const ch = cell.ch;
-            if (ch && ch !== ' ' && ch !== '\u0000') {
-                ctx.fillStyle = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
-                if (cell.bold) {
-                    ctx.font = `bold ${FONT_SIZE}px ${currentFont}`;
-                }
-                ctx.fillText(ch, px, py + 2);
-                if (cell.bold) {
-                    ctx.font = `${FONT_SIZE}px ${currentFont}`;
-                }
-            }
+            // Cambia colore solo se necessario
+            const fill = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
+            if (fill !== lastFill) { ctx.fillStyle = fill; lastFill = fill; }
 
-            // Underline
+            ctx.fillText(ch, px, py);
+
             if (cell.ul) {
-                ctx.strokeStyle = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
+                ctx.strokeStyle = fill;
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(px, py + cellH - 1);
@@ -120,8 +159,8 @@ function renderCursor() {
         if (cell.ch && cell.ch !== ' ' && cell.ch !== '\u0000') {
             ctx.fillStyle = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
             ctx.font = `${cell.bold ? 'bold ' : ''}${FONT_SIZE}px ${currentFont}`;
-            ctx.fillText(cell.ch, px, py + 2);
-            ctx.font = `${FONT_SIZE}px ${currentFont}`;
+            ctx.textBaseline = 'top';
+            ctx.fillText(cell.ch, px, py);
         }
 
         // Disegna cursore
@@ -526,7 +565,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.font = `${FONT_SIZE}px ${currentFont}`;
     ctx.fillStyle = '#FFFF55';
-    ctx.fillText('BBS Client for Gen-Z v0.4.0 — Pronto', 10, 20);
+    ctx.fillText('BBS Client for Gen-Z v0.9.0 — Pronto', 10, 20);
     ctx.fillStyle = '#55FFFF';
     ctx.fillText('Seleziona una BBS e premi CONNETTI', 10, 44);
     ctx.fillStyle = '#555555';
