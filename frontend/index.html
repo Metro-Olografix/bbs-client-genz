@@ -24,6 +24,7 @@
             <div class="spacer"></div>
             <button id="btn-log" class="btn" title="Carica un file di log sessione">LOG</button>
             <button id="btn-font" class="btn btn-font" title="Cambia font: IBM VGA / VT323">IBM VGA</button>
+            <button id="btn-crt" class="btn btn-crt" title="Effetto CRT monitor vintage">CRT</button>
             <button id="btn-clear" class="btn" title="Pulisce lo schermo">PULISCI</button>
             <button id="btn-upload" class="btn btn-green" title="Upload file via ZMODEM" disabled>UPLOAD</button>
         </div>
@@ -31,12 +32,18 @@
 
     <!-- ═══ TERMINALE ═══ -->
     <div id="terminal-container">
-        <canvas id="terminal" tabindex="0"></canvas>
+        <div class="crt-wrapper">
+            <canvas id="terminal" tabindex="0"></canvas>
+            <div class="crt-scanlines"></div>
+            <div class="crt-glow"></div>
+            <div class="crt-vignette"></div>
+            <div class="crt-rgb"></div>
+        </div>
     </div>
 
     <!-- ═══ STATUS BAR ═══ -->
     <div id="statusbar">
-        <span id="status-text">Alt-Z for Help │ ANSI │ Telnet │ Pronto</span>
+        <span id="status-text">F1 Help │ ANSI │ Telnet │ Pronto</span>
         <button id="btn-about" class="btn btn-info" title="About">i</button>
     </div>
 
@@ -52,6 +59,36 @@
             <div id="zmodem-speed">Velocità: — KB/s</div>
             <div id="zmodem-eta">ETA: —</div>
             <button id="btn-zmodem-cancel" class="btn btn-red">ANNULLA</button>
+        </div>
+    </div>
+
+    <!-- ═══ HELP OVERLAY (Alt-Z) ═══ -->
+    <div id="help-overlay" class="hidden">
+        <div id="help-dialog">
+            <div class="help-title">BBS Client for Gen-Z — Help</div>
+            <div class="help-separator"></div>
+            <div class="help-body">
+                <div class="help-section">CONNESSIONE</div>
+                <div class="help-row"><span class="help-key">Cmd+D</span><span class="help-desc">Disconnetti dalla BBS</span></div>
+                <div class="help-row"><span class="help-key">Enter</span><span class="help-desc">Connetti (nel campo Host)</span></div>
+                <div class="help-section">TERMINALE</div>
+                <div class="help-row"><span class="help-key">F2—F12</span><span class="help-desc">Tasti funzione BBS</span></div>
+                <div class="help-row"><span class="help-key">Ctrl+A—Z</span><span class="help-desc">Sequenze di controllo</span></div>
+                <div class="help-section">LOG VIEWER</div>
+                <div class="help-row"><span class="help-key">Spazio / →</span><span class="help-desc">Pagina avanti</span></div>
+                <div class="help-row"><span class="help-key">←</span><span class="help-desc">Pagina indietro</span></div>
+                <div class="help-row"><span class="help-key">ESC</span><span class="help-desc">Esci dal log viewer</span></div>
+                <div class="help-section">TRASFERIMENTO FILE</div>
+                <div class="help-row"><span class="help-key">UPLOAD</span><span class="help-desc">Invia file via ZMODEM</span></div>
+                <div class="help-row"><span class="help-key">Download</span><span class="help-desc">Automatico via ZMODEM</span></div>
+                <div class="help-section">INTERFACCIA</div>
+                <div class="help-row"><span class="help-key">F1</span><span class="help-desc">Mostra/chiudi questo help</span></div>
+                <div class="help-row"><span class="help-key">CRT</span><span class="help-desc">Effetto monitor vintage on/off</span></div>
+                <div class="help-row"><span class="help-key">FONT</span><span class="help-desc">Alterna IBM VGA / VT323</span></div>
+                <div class="help-row"><span class="help-key">LOG</span><span class="help-desc">Carica log sessione precedente</span></div>
+                <div class="help-row"><span class="help-key">PULISCI</span><span class="help-desc">Svuota lo schermo</span></div>
+            </div>
+            <button id="btn-help-close" class="btn">CHIUDI (ESC)</button>
         </div>
     </div>
 

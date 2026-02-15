@@ -178,6 +178,19 @@ body {
     text-align: center;
 }
 
+.btn-crt {
+    font-size: 11px;
+    min-width: 42px;
+    text-align: center;
+    color: #888;
+    transition: all 0.2s;
+}
+.btn-crt.active {
+    color: #55FF55;
+    border-color: #55FF55;
+    text-shadow: 0 0 6px rgba(0, 255, 65, 0.6);
+}
+
 .btn-info {
     width: 24px;
     height: 24px;
@@ -220,6 +233,125 @@ body {
 
 #terminal:focus {
     box-shadow: 0 0 0 1px #333;
+}
+
+/* ─── CRT SHADER EFFECT ─── */
+
+.crt-on #terminal-container {
+    perspective: 800px;
+}
+
+.crt-on #terminal {
+    /* Curvatura sottile del monitor */
+    border-radius: 12px;
+    box-shadow:
+        0 0 60px rgba(0, 255, 65, 0.08),
+        0 0 120px rgba(0, 255, 65, 0.04),
+        inset 0 0 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Scanlines overlay */
+.crt-on .crt-scanlines {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 12px;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 1px,
+        rgba(0, 0, 0, 0.3) 1px,
+        rgba(0, 0, 0, 0.3) 2px
+    );
+    z-index: 2;
+}
+
+/* Phosphor glow (flicker sottile) */
+.crt-on .crt-glow {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 12px;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 255, 65, 0.03) 0%,
+        transparent 70%
+    );
+    z-index: 3;
+    animation: crt-flicker 0.08s infinite alternate;
+}
+
+/* Vignette — scurimento ai bordi */
+.crt-on .crt-vignette {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 12px;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 55%,
+        rgba(0, 0, 0, 0.5) 85%,
+        rgba(0, 0, 0, 0.85) 100%
+    );
+    z-index: 4;
+}
+
+/* RGB sub-pixel shimmer */
+.crt-on .crt-rgb {
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    border-radius: 12px;
+    background: repeating-linear-gradient(
+        to right,
+        rgba(255, 0, 0, 0.02) 0px,
+        rgba(0, 255, 0, 0.02) 1px,
+        rgba(0, 0, 255, 0.02) 2px,
+        transparent 3px
+    );
+    z-index: 5;
+}
+
+/* Nascosti per default (quando CRT off) */
+.crt-scanlines,
+.crt-glow,
+.crt-vignette,
+.crt-rgb {
+    display: none;
+}
+
+/* Flicker animation — molto sottile */
+@keyframes crt-flicker {
+    0%   { opacity: 0.97; }
+    100% { opacity: 1.0;  }
+}
+
+/* Canvas wrapper per posizionare gli overlay */
+.crt-on #terminal-container {
+    position: relative;
+}
+
+/* Il canvas deve fare da "ancora" per i layer */
+.crt-on .crt-wrapper {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+}
+
+/* Screen turn-on animation */
+.crt-on .crt-wrapper {
+    animation: crt-turn-on 0.4s ease-out;
+}
+
+@keyframes crt-turn-on {
+    0%   { transform: scaleY(0.005); filter: brightness(4); }
+    40%  { transform: scaleY(1.1); filter: brightness(2); }
+    70%  { transform: scaleY(0.98); filter: brightness(1.2); }
+    100% { transform: scaleY(1.0); filter: brightness(1); }
 }
 
 /* ─── STATUS BAR ─── */
@@ -340,4 +472,81 @@ body {
     color: var(--text-bright);
     background: #880000;
     border-color: var(--text-bright);
+}
+
+/* ─── HELP DIALOG (Alt-Z) ─── */
+
+#help-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#help-dialog {
+    background: #0C0C1D;
+    border: 3px double #00AAAA;
+    padding: 14px 20px;
+    font-family: var(--font);
+    color: var(--text);
+    min-width: 400px;
+    box-shadow: 0 0 30px rgba(0, 170, 170, 0.15), inset 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+.help-title {
+    color: #FFFF55;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px 0;
+}
+
+.help-separator {
+    border-top: 1px solid #00AAAA;
+    margin: 6px 0;
+}
+
+.help-body {
+    padding: 6px 4px;
+}
+
+.help-section {
+    color: #55FFFF;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 8px;
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+
+.help-section:first-child {
+    margin-top: 2px;
+}
+
+.help-row {
+    display: flex;
+    padding: 1px 0;
+    font-size: 14px;
+}
+
+.help-key {
+    color: #FFFFFF;
+    min-width: 120px;
+    font-weight: bold;
+}
+
+.help-desc {
+    color: #AAAAAA;
+}
+
+#btn-help-close {
+    margin-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: #55FFFF;
+    border-color: #00AAAA;
 }

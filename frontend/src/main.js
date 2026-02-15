@@ -23,7 +23,17 @@ let cursorX = 0, cursorY = 0;
 let screenData = null;
 let connected = false;
 let viewingLog = false;
+let crtEnabled = false;
 
+
+function syncCrtOverlays() {
+    // Assicura che gli overlay CRT coprano esattamente il canvas
+    const overlays = document.querySelectorAll('.crt-scanlines, .crt-glow, .crt-vignette, .crt-rgb');
+    overlays.forEach(el => {
+        el.style.width = canvas.style.width;
+        el.style.height = canvas.style.height;
+    });
+}
 
 function initCanvas() {
     canvas = document.getElementById('terminal');
@@ -73,6 +83,9 @@ function resizeCanvas() {
     if (screenData) {
         renderScreen(screenData);
     }
+
+    // Sincronizza overlay CRT
+    syncCrtOverlays();
 }
 
 // Helper: genera una chiave colore per confronto rapido
@@ -220,10 +233,16 @@ function setupKeyboard() {
             return;
         }
 
+        // F1 o Alt+Z → toggle help overlay
+        if (e.key === 'F1' || (e.altKey && e.code === 'KeyZ')) {
+            toggleHelp();
+            return;
+        }
+
         if (!connected) return;
 
-        // Ctrl+] → disconnetti (BUG-008)
-        if (e.ctrlKey && e.key === ']') {
+        // Cmd+D (Mac) o Ctrl+D → disconnetti
+        if ((e.metaKey || e.ctrlKey) && e.code === 'KeyD') {
             await window.go.main.App.Disconnect();
             return;
         }
@@ -330,6 +349,18 @@ function setupControls() {
     });
     btnFont.textContent = currentFontLabel;
 
+    // CRT toggle
+    const btnCrt = document.getElementById('btn-crt');
+    btnCrt.addEventListener('click', () => {
+        crtEnabled = !crtEnabled;
+        document.body.classList.toggle('crt-on', crtEnabled);
+        btnCrt.classList.toggle('active', crtEnabled);
+        setStatus(crtEnabled ? 'CRT shader: ON' : 'CRT shader: OFF');
+        // Risincronizza dimensioni overlay con canvas
+        syncCrtOverlays();
+        canvas.focus();
+    });
+
     // PULISCI
     btnClear.addEventListener('click', async () => {
         await window.go.main.App.ClearScreen();
@@ -407,6 +438,33 @@ function setUIConnected(state) {
 
 function setStatus(text) {
     document.getElementById('status-text').textContent = text;
+}
+
+// ═══════════════════════════════════════════
+// Help Overlay (Alt-Z)
+// ═══════════════════════════════════════════
+
+function toggleHelp() {
+    const overlay = document.getElementById('help-overlay');
+    overlay.classList.toggle('hidden');
+    if (overlay.classList.contains('hidden')) {
+        canvas.focus();
+    }
+}
+
+function setupHelp() {
+    document.getElementById('btn-help-close').addEventListener('click', () => {
+        toggleHelp();
+    });
+
+    // ESC chiude l'help se è aperto
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !document.getElementById('help-overlay').classList.contains('hidden')) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleHelp();
+        }
+    });
 }
 
 // ═══════════════════════════════════════════
@@ -562,6 +620,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initCanvas();
     setupKeyboard();
     setupControls();
+    setupHelp();
 
     // Aspetta che Wails sia pronto
     await new Promise(resolve => {
@@ -589,7 +648,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ctx.fillStyle = '#55FFFF';
     ctx.fillText('Seleziona una BBS e premi CONNETTI', 10, 44);
     ctx.fillStyle = '#555555';
-    ctx.fillText('Ctrl+] per disconnettere', 10, 68);
+    ctx.fillText('F1 = Help  │  Cmd+D = Disconnetti', 10, 68);
 
     canvas.focus();
 });

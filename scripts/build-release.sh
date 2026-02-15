@@ -2,16 +2,19 @@
 # ─────────────────────────────────────────────────
 # build-release.sh — Crea release distribuibili
 # Uso: ./scripts/build-release.sh [versione] [piattaforma]
-# Es:  ./scripts/build-release.sh 0.9.1
-#      ./scripts/build-release.sh 0.9.1 macos
-#      ./scripts/build-release.sh 0.9.1 windows
-#      ./scripts/build-release.sh 0.9.1 all
-# Piattaforme: macos, windows, all (default: macos)
+# Es:  ./scripts/build-release.sh 1.1.0
+#      ./scripts/build-release.sh 1.1.0 macos
+#      ./scripts/build-release.sh 1.1.0 windows
+#      ./scripts/build-release.sh 1.1.0 linux
+#      ./scripts/build-release.sh 1.1.0 all
+# Piattaforme: macos, windows, linux, all (default: macos)
+# Nota: linux richiede di essere eseguito su una macchina Linux
+#       con le dipendenze GTK/WebKit installate.
 # ─────────────────────────────────────────────────
 
 set -e
 
-VERSION="${1:-0.9.1}"
+VERSION="${1:-1.1.0}"
 PLATFORM="${2:-macos}"
 APP_NAME="BBS Client for Gen-Z"
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
@@ -111,6 +114,62 @@ build_windows() {
     echo "✓ ZIP: $ZIP_NAME ($(du -sh "$ZIP_PATH" | cut -f1))"
 }
 
+# ─── Linux (build nativa, no cross-compile) ───
+build_linux() {
+    echo ""
+    echo "── Linux Build ──────────────────────────"
+
+    # Verifica che siamo su Linux
+    if [ "$(uname -s)" != "Linux" ]; then
+        echo "✗ La build Linux richiede una macchina Linux nativa."
+        echo "  Non è possibile cross-compilare da $(uname -s)."
+        echo ""
+        echo "  Su una macchina Linux (Debian/Ubuntu):"
+        echo "    sudo apt install libgtk-3-dev libwebkit2gtk-4.0-dev"
+        echo "    go install github.com/wailsapp/wails/v2/cmd/wails@latest"
+        echo "    ./scripts/build-release.sh ${VERSION} linux"
+        return 1
+    fi
+
+    # Verifica dipendenze GTK/WebKit
+    MISSING=""
+    if ! pkg-config --exists gtk+-3.0 2>/dev/null; then
+        MISSING="$MISSING libgtk-3-dev"
+    fi
+    if ! pkg-config --exists webkit2gtk-4.0 2>/dev/null; then
+        MISSING="$MISSING libwebkit2gtk-4.0-dev"
+    fi
+    if [ -n "$MISSING" ]; then
+        echo "✗ Dipendenze mancanti:${MISSING}"
+        echo "  Installa con: sudo apt install${MISSING}"
+        return 1
+    fi
+
+    wails build -platform linux/amd64
+
+    BIN_PATH="$PROJECT_DIR/build/bin/bbsclient-gui"
+    if [ ! -f "$BIN_PATH" ]; then
+        echo "✗ Errore: ${BIN_PATH} non trovato!"
+        return 1
+    fi
+
+    # Pulizia artefatti runtime
+    rm -rf "$PROJECT_DIR/build/bin/downloads"
+    rm -rf "$PROJECT_DIR/build/bin/logs"
+
+    echo "✓ BIN: $(du -sh "$BIN_PATH" | cut -f1)"
+    echo "  Arch: $(file "$BIN_PATH" | sed 's/.*: //')"
+
+    # TAR.GZ per Linux
+    echo "→ Creazione tar.gz..."
+    TAR_NAME="BBS-Client-v${VERSION}-Linux-x64.tar.gz"
+    TAR_PATH="$DIST_DIR/$TAR_NAME"
+    cd "$PROJECT_DIR/build/bin"
+    tar czf "$TAR_PATH" bbsclient-gui
+    cd "$PROJECT_DIR"
+    echo "✓ TAR: $TAR_NAME ($(du -sh "$TAR_PATH" | cut -f1))"
+}
+
 # ─── Esegui build ───
 case "$PLATFORM" in
     macos)
@@ -119,14 +178,19 @@ case "$PLATFORM" in
     windows|win)
         build_windows
         ;;
+    linux)
+        build_linux
+        ;;
     all)
         build_macos
         rm -rf "$PROJECT_DIR/build/bin"
         build_windows
+        rm -rf "$PROJECT_DIR/build/bin"
+        build_linux
         ;;
     *)
         echo "✗ Piattaforma non riconosciuta: $PLATFORM"
-        echo "  Usa: macos, windows, all"
+        echo "  Usa: macos, windows, linux, all"
         exit 1
         ;;
 esac
@@ -137,5 +201,5 @@ echo "  ✓ Release v${VERSION} completata!"
 echo "══════════════════════════════════════════"
 echo ""
 echo "  File in: $DIST_DIR/"
-ls -lh "$DIST_DIR/"*.{dmg,zip} 2>/dev/null | awk '{print "  " $NF " (" $5 ")"}'
+ls -lh "$DIST_DIR/"*.{dmg,zip,tar.gz} 2>/dev/null | awk '{print "  " $NF " (" $5 ")"}'
 echo ""
