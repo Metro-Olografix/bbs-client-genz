@@ -233,6 +233,19 @@ body {
     flex-shrink: 0;
     white-space: nowrap;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+#statusbar #status-text {
+    flex: 1;
+}
+#statusbar .btn-info {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-left: 8px;
 }
 
 /* ─── ZMODEM OVERLAY ─── */

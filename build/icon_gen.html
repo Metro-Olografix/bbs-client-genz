@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body { margin: 0; background: #222; display: flex; justify-content: center; align-items: center; height: 100vh; }
+canvas { border: 1px solid #333; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1024" height="1024"></canvas>
+<script>
+const c = document.getElementById('c');
+const ctx = c.getContext('2d');
+const W = 1024;
+
+function roundRect(x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.lineTo(x + w - r, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+    ctx.lineTo(x + w, y + h - r);
+    ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+    ctx.lineTo(x + r, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    ctx.lineTo(x, y + r);
+    ctx.quadraticCurveTo(x, y, x + r, y);
+    ctx.closePath();
+}
+
+// ── Sfondo icon (rounded square) ──
+roundRect(0, 0, W, W, 180);
+const bgGrad = ctx.createLinearGradient(0, 0, 0, W);
+bgGrad.addColorStop(0, '#1a1a2e');
+bgGrad.addColorStop(1, '#0a0a18');
+ctx.fillStyle = bgGrad;
+ctx.fill();
+
+// ── Monitor CRT ──
+const monX = 80, monY = 55, monW = W - 160, monH = 780;
+const monRad = 60;
+roundRect(monX, monY, monW, monH, monRad);
+const monGrad = ctx.createLinearGradient(0, monY, 0, monY + monH);
+monGrad.addColorStop(0, '#3a3a4a');
+monGrad.addColorStop(0.5, '#2a2a38');
+monGrad.addColorStop(1, '#1a1a28');
+ctx.fillStyle = monGrad;
+ctx.fill();
+roundRect(monX, monY, monW, monH, monRad);
+ctx.strokeStyle = '#555568';
+ctx.lineWidth = 4;
+ctx.stroke();
+
+// ── Schermo ──
+const scrX = 120, scrY = 95, scrW = W - 240, scrH = 660;
+const scrRad = 20;
+roundRect(scrX, scrY, scrW, scrH, scrRad);
+const scrGrad = ctx.createRadialGradient(W/2, scrY + scrH/2, 100, W/2, scrY + scrH/2, scrH);
+scrGrad.addColorStop(0, '#001a00');
+scrGrad.addColorStop(1, '#000800');
+ctx.fillStyle = scrGrad;
+ctx.fill();
+roundRect(scrX, scrY, scrW, scrH, scrRad);
+ctx.strokeStyle = '#111118';
+ctx.lineWidth = 6;
+ctx.stroke();
+roundRect(scrX + 3, scrY + 3, scrW - 6, scrH - 6, scrRad - 2);
+ctx.strokeStyle = '#444455';
+ctx.lineWidth = 1;
+ctx.stroke();
+
+// ── Contenuto terminale su GRIGLIA FISSA ──
+ctx.save();
+ctx.beginPath();
+roundRect(scrX + 6, scrY + 6, scrW - 12, scrH - 12, scrRad - 4);
+ctx.clip();
+
+// Griglia: 28 colonne × 15 righe dentro lo schermo
+const gridCols = 28;
+const gridRows = 15;
+const gridX = scrX + 28;
+const gridY = scrY + 30;
+const charW = (scrW - 56) / gridCols;  // larghezza cella
+const charH = 40;                       // altezza cella
+
+// Ogni riga è esattamente 28 caratteri con colore per carattere
+// Formato: [{char, color}, ...] — generato da helper
+function makeLine(segments) {
+    const chars = [];
+    segments.forEach(s => {
+        for (let i = 0; i < s.t.length; i++) {
+            chars.push({ch: s.t[i], c: s.c});
+        }
+    });
+    // Pad a 28 colonne con spazi neri
+    while (chars.length < gridCols) {
+        chars.push({ch: ' ', c: '#000000'});
+    }
+    return chars;
+}
+
+const screenLines = [
+    //           1234567890123456789012345678
+    makeLine([{t:'╔══════════════════════════╗', c:'#55FFFF'}]),
+    makeLine([{t:'║', c:'#55FFFF'}, {t:'   BBS Client for Gen-Z   ', c:'#55FFFF'}, {t:'║', c:'#55FFFF'}]),
+    makeLine([{t:'║', c:'#55FFFF'}, {t:'     << CONNECTED >>      ', c:'#55FF55'}, {t:'║', c:'#55FFFF'}]),
+    makeLine([{t:'╚══════════════════════════╝', c:'#55FFFF'}]),
+    null,
+    makeLine([{t:' Welcome to Metro Olografix ', c:'#FFFF55'}]),
+    makeLine([{t:' ───────────────────────────', c:'#AA5500'}]),
+    makeLine([{t:' [1] Message Areas', c:'#55FF55'}]),
+    makeLine([{t:' [2] File Areas', c:'#55FF55'}]),
+    makeLine([{t:' [3] Online Games', c:'#55FF55'}]),
+    makeLine([{t:' [4] User List', c:'#55FF55'}]),
+    makeLine([{t:' [Q] Quit', c:'#FF5555'}]),
+    null,
+    makeLine([{t:' Select: ', c:'#AAAAAA'}, {t:'█', c:'#55FF55'}]),
+];
+
+ctx.textBaseline = 'top';
+
+// Disegna carattere per carattere sulla griglia fissa
+const charFontSize = Math.round(charW * 1.5);
+ctx.font = `${charFontSize}px 'Courier New', monospace`;
+screenLines.forEach((lineChars, row) => {
+    if (!lineChars) return;
+    lineChars.forEach((cell, col) => {
+        if (cell.ch === ' ' && cell.c === '#000000') return;
+        const px = gridX + col * charW;
+        const py = gridY + row * charH;
+        ctx.fillStyle = cell.c;
+        ctx.shadowColor = cell.c;
+        ctx.shadowBlur = 6;
+        ctx.fillText(cell.ch, px, py);
+    });
+});
+
+// Scanlines
+ctx.shadowColor = 'transparent';
+ctx.shadowBlur = 0;
+for (let y = scrY; y < scrY + scrH; y += 3) {
+    ctx.fillStyle = 'rgba(0,0,0,0.15)';
+    ctx.fillRect(scrX, y, scrW, 1);
+}
+
+// CRT vignette
+const vigGrad = ctx.createRadialGradient(W/2, scrY + scrH/2, 200, W/2, scrY + scrH/2, scrW * 0.7);
+vigGrad.addColorStop(0, 'rgba(0,0,0,0)');
+vigGrad.addColorStop(1, 'rgba(0,0,0,0.4)');
+ctx.fillStyle = vigGrad;
+ctx.fillRect(scrX, scrY, scrW, scrH);
+
+ctx.restore();
+
+// ── Base monitor ──
+const colW2 = 120, colH2 = 20;
+const colX2 = (W - colW2) / 2, colY2 = monY + monH;
+ctx.fillStyle = '#2a2a38';
+ctx.fillRect(colX2, colY2, colW2, colH2);
+
+const baseW = 300, baseH = 30;
+const baseX = (W - baseW) / 2, baseY = monY + monH + 18;
+roundRect(baseX, baseY, baseW, baseH, 8);
+const baseGrad = ctx.createLinearGradient(0, baseY, 0, baseY + baseH);
+baseGrad.addColorStop(0, '#3a3a4a');
+baseGrad.addColorStop(1, '#222230');
+ctx.fillStyle = baseGrad;
+ctx.fill();
+ctx.strokeStyle = '#555568';
+ctx.lineWidth = 2;
+ctx.stroke();
+
+// ── LED power ──
+ctx.beginPath();
+ctx.arc(W/2 - 100, monY + monH - 28, 6, 0, Math.PI * 2);
+ctx.fillStyle = '#00FF00';
+ctx.shadowColor = '#00FF00';
+ctx.shadowBlur = 12;
+ctx.fill();
+ctx.shadowBlur = 0;
+
+// ── Label sul monitor (piccola, sotto schermo) ──
+ctx.font = 'bold 26px Arial, sans-serif';
+ctx.fillStyle = '#666677';
+ctx.textAlign = 'center';
+ctx.fillText('BBS CLIENT', W/2, monY + monH - 32);
+ctx.textAlign = 'left';
+
+// ── Versione in basso ──
+ctx.font = '22px Courier New, monospace';
+ctx.fillStyle = '#444455';
+ctx.textAlign = 'center';
+ctx.fillText('v0.9.1', W/2, baseY + 50);
+ctx.textAlign = 'left';
+
+</script>
+</body>
+</html>
