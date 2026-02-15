@@ -19,7 +19,7 @@ Un client BBS telnet moderno con GUI nativa, scritto in Go con [Wails v2](https:
 
 ## Screenshot
 
-> TODO: aggiungere screenshot del terminale con CRT shader attivo
+![BBS Client con CRT shader — connesso a Metro Olografix BBS](docs/screenshot-crt.png)
 
 ## Requisiti per la build
 
