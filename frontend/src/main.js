@@ -218,6 +218,11 @@ function requestScreenUpdate() {
 
 function setupKeyboard() {
     canvas.addEventListener('keydown', async (e) => {
+        // Lascia passare le scorciatoie di sistema (Cmd+Q, Cmd+W, Cmd+H, Cmd+M, ecc.)
+        if (e.metaKey && ['q', 'w', 'h', 'm', 'Tab'].includes(e.key)) {
+            return;
+        }
+
         e.preventDefault();
         e.stopPropagation();
 
