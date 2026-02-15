@@ -1,0 +1,330 @@
+/* ═══════════════════════════════════════════
+   BBS Client for Gen-Z — Stile Telix 3.22
+   ═══════════════════════════════════════════ */
+
+@font-face {
+    font-family: 'IBM VGA';
+    src: url('/fonts/Px437_IBM_VGA8.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --bg: #000000;
+    --toolbar-bg: #1a1a1a;
+    --status-bg: #AA0000;
+    --status-fg: #FFFF55;
+    --text: #AAAAAA;
+    --text-bright: #FFFF55;
+    --input-bg: #111111;
+    --input-border: #555555;
+    --btn-bg: #222222;
+    --btn-border: #555555;
+    --btn-hover-bg: #333333;
+    --red: #FF5555;
+    --green: #55FF55;
+    --font: 'VT323', 'Consolas', 'DejaVu Sans Mono', 'Courier New', monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* ─── TOOLBAR ─── */
+
+#toolbar {
+    background: var(--toolbar-bg);
+    border-bottom: 1px solid #333;
+    flex-shrink: 0;
+    padding: 0;
+    --wails-draggable: drag;
+}
+
+#toolbar-row1 {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 8px;
+    flex-wrap: nowrap;
+}
+
+#toolbar select,
+#toolbar input,
+#toolbar button,
+#toolbar label {
+    --wails-draggable: no-drag;
+}
+
+.field-label {
+    color: #888;
+    font-family: var(--font);
+    font-size: 12px;
+    margin-left: 2px;
+    white-space: nowrap;
+}
+
+#bbs-select {
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-bright);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    padding: 4px 8px;
+    min-width: 220px;
+    max-width: 350px;
+    outline: none;
+}
+#bbs-select option {
+    background: var(--input-bg);
+    color: var(--text);
+}
+
+#host-input {
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-bright);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    padding: 4px 8px;
+    width: 160px;
+    outline: none;
+}
+
+#port-input {
+    font-family: var(--font);
+    font-size: 13px;
+    color: var(--text-bright);
+    background: var(--input-bg);
+    border: 1px solid var(--input-border);
+    padding: 4px 6px;
+    width: 58px;
+    outline: none;
+    -moz-appearance: textfield;
+}
+#port-input::-webkit-inner-spin-button,
+#port-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.spacer { flex: 1; }
+
+/* ─── BUTTONS ─── */
+
+.btn {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--text);
+    background: var(--btn-bg);
+    border: 1px solid var(--btn-border);
+    padding: 4px 10px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.1s;
+    white-space: nowrap;
+}
+.btn:hover {
+    background: var(--btn-hover-bg);
+    color: var(--text-bright);
+    border-color: #888;
+}
+.btn:active {
+    background: #111;
+}
+.btn:disabled {
+    background: #1a1a1a;
+    color: #444;
+    border-color: #333;
+    cursor: default;
+}
+
+.btn-connect {
+    color: var(--text-bright);
+    border-color: #666;
+}
+
+.btn-red {
+    color: var(--red);
+}
+.btn-red:hover {
+    color: #FF8888;
+}
+
+.btn-green {
+    color: var(--green);
+}
+.btn-green:hover {
+    color: #88FF88;
+}
+
+.btn-font {
+    font-size: 11px;
+    min-width: 64px;
+    text-align: center;
+}
+
+.btn-info {
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    padding: 0;
+    font-style: italic;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    color: var(--text-bright);
+    background: #880000;
+    border: 2px solid var(--text-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-info:hover {
+    background: #CC0000;
+    border-color: white;
+    color: white;
+}
+
+/* ─── TERMINAL ─── */
+
+#terminal-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--bg);
+    padding: 4px;
+    overflow: hidden;
+}
+
+#terminal {
+    background: var(--bg);
+    outline: none;
+    cursor: text;
+    image-rendering: pixelated;
+}
+
+#terminal:focus {
+    box-shadow: 0 0 0 1px #333;
+}
+
+/* ─── STATUS BAR ─── */
+
+#statusbar {
+    background: var(--status-bg);
+    color: var(--status-fg);
+    font-family: var(--font);
+    font-size: 14px;
+    padding: 2px 8px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* ─── ZMODEM OVERLAY ─── */
+
+.hidden { display: none !important; }
+
+#zmodem-overlay,
+#about-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+#zmodem-dialog {
+    background: #0C0C1D;
+    border: 2px solid #AA0000;
+    padding: 16px 20px;
+    min-width: 380px;
+    font-family: var(--font);
+}
+
+#zmodem-title {
+    color: var(--text-bright);
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+#zmodem-file,
+#zmodem-bytes,
+#zmodem-speed,
+#zmodem-eta {
+    color: var(--text);
+    font-size: 14px;
+    margin: 4px 0;
+}
+
+#zmodem-bar-container {
+    background: #111;
+    border: 1px solid #555;
+    height: 22px;
+    margin: 8px 0;
+    position: relative;
+}
+
+#zmodem-bar {
+    background: #AA0000;
+    height: 100%;
+    width: 0%;
+    transition: width 0.2s;
+}
+
+#btn-zmodem-cancel {
+    margin-top: 8px;
+}
+
+/* ─── ABOUT DIALOG ─── */
+
+#about-dialog {
+    background: #AA0000;
+    border: 3px solid var(--text-bright);
+    padding: 16px 24px;
+    text-align: center;
+    font-family: var(--font);
+    color: var(--text-bright);
+}
+
+.about-border {
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin: 4px 0;
+}
+
+.about-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 8px 0;
+}
+
+.about-body {
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 12px 0;
+}
+
+#btn-about-close {
+    margin-top: 12px;
+    color: var(--text-bright);
+    background: #880000;
+    border-color: var(--text-bright);
+}

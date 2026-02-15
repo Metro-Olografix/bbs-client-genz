@@ -1,0 +1,536 @@
+/**
+ * BBS Client for Gen-Z — Frontend
+ * Terminal renderer (canvas), keyboard handler, Wails event bridge.
+ */
+
+// ═══════════════════════════════════════════
+// Terminal Renderer (Canvas 80×25)
+// ═══════════════════════════════════════════
+
+const COLS = 80;
+const ROWS = 25;
+const FONT_VT323 = "'VT323', 'Consolas', 'Courier New', monospace";
+const FONT_IBM_VGA = "'IBM VGA', 'Consolas', 'Courier New', monospace";
+let currentFont = FONT_IBM_VGA; // Default: IBM VGA
+let currentFontLabel = 'IBM VGA';
+const FONT_SIZE = 16; // fisso, come nel Python (IBM VGA 16pt)
+
+let canvas, ctx;
+let cellW = 0, cellH = 0;
+let cursorOn = true;
+let cursorX = 0, cursorY = 0;
+let screenData = null;
+let connected = false;
+let viewingLog = false;
+
+
+function initCanvas() {
+    canvas = document.getElementById('terminal');
+    ctx = canvas.getContext('2d');
+    resizeCanvas();
+    canvas.focus();
+
+    // Cursore lampeggiante
+    setInterval(() => {
+        cursorOn = !cursorOn;
+        renderCursor();
+    }, 530);
+}
+
+function resizeCanvas() {
+    ctx.font = `${FONT_SIZE}px ${currentFont}`;
+    const metrics = ctx.measureText('M');
+    cellW = Math.ceil(metrics.width);
+    cellH = FONT_SIZE + 2;
+
+    const w = cellW * COLS;
+    const h = cellH * ROWS;
+    canvas.width = w;
+    canvas.height = h;
+    canvas.style.width = w + 'px';
+    canvas.style.height = h + 'px';
+
+    // Clear
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, w, h);
+
+    // Ridisegna se ci sono dati
+    if (screenData) {
+        renderScreen(screenData);
+    }
+}
+
+function renderScreen(data) {
+    if (!ctx || !data) return;
+    screenData = data;
+
+    ctx.font = `${FONT_SIZE}px ${currentFont}`;
+    ctx.textBaseline = 'top';
+
+    for (let y = 0; y < ROWS && y < data.length; y++) {
+        const row = data[y];
+        for (let x = 0; x < COLS && x < row.length; x++) {
+            const cell = row[x];
+            const px = x * cellW;
+            const py = y * cellH;
+
+            // Background
+            ctx.fillStyle = `rgb(${cell.bgR},${cell.bgG},${cell.bgB})`;
+            ctx.fillRect(px, py, cellW, cellH);
+
+            // Character
+            const ch = cell.ch;
+            if (ch && ch !== ' ' && ch !== '\u0000') {
+                ctx.fillStyle = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
+                if (cell.bold) {
+                    ctx.font = `bold ${FONT_SIZE}px ${currentFont}`;
+                }
+                ctx.fillText(ch, px, py + 2);
+                if (cell.bold) {
+                    ctx.font = `${FONT_SIZE}px ${currentFont}`;
+                }
+            }
+
+            // Underline
+            if (cell.ul) {
+                ctx.strokeStyle = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(px, py + cellH - 1);
+                ctx.lineTo(px + cellW, py + cellH - 1);
+                ctx.stroke();
+            }
+        }
+    }
+
+    renderCursor();
+}
+
+function renderCursor() {
+    if (!ctx || !screenData) return;
+
+    if (cursorY < screenData.length && cursorX < screenData[cursorY].length) {
+        const cell = screenData[cursorY][cursorX];
+        const px = cursorX * cellW;
+        const py = cursorY * cellH;
+
+        // Ridisegna cella
+        ctx.fillStyle = `rgb(${cell.bgR},${cell.bgG},${cell.bgB})`;
+        ctx.fillRect(px, py, cellW, cellH);
+        if (cell.ch && cell.ch !== ' ' && cell.ch !== '\u0000') {
+            ctx.fillStyle = `rgb(${cell.fgR},${cell.fgG},${cell.fgB})`;
+            ctx.font = `${cell.bold ? 'bold ' : ''}${FONT_SIZE}px ${currentFont}`;
+            ctx.fillText(cell.ch, px, py + 2);
+            ctx.font = `${FONT_SIZE}px ${currentFont}`;
+        }
+
+        // Disegna cursore
+        if (cursorOn && document.activeElement === canvas) {
+            ctx.globalCompositeOperation = 'difference';
+            ctx.fillStyle = 'rgba(0, 255, 65, 0.7)';
+            ctx.fillRect(px, py, cellW, cellH);
+            ctx.globalCompositeOperation = 'source-over';
+        }
+    }
+}
+
+// ═══════════════════════════════════════════
+// Screen Update
+// ═══════════════════════════════════════════
+
+async function updateScreen() {
+    try {
+        const data = await window.go.main.App.GetScreen();
+        const cursor = await window.go.main.App.GetCursor();
+        cursorX = cursor.x;
+        cursorY = cursor.y;
+        renderScreen(data);
+    } catch (e) {
+        console.error('updateScreen error:', e);
+    }
+}
+
+let updatePending = false;
+function requestScreenUpdate() {
+    if (updatePending) return;
+    updatePending = true;
+    requestAnimationFrame(() => {
+        updatePending = false;
+        updateScreen();
+    });
+}
+
+// ═══════════════════════════════════════════
+// Keyboard Handler
+// ═══════════════════════════════════════════
+
+function setupKeyboard() {
+    canvas.addEventListener('keydown', async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Log viewer: navigazione con SPAZIO, frecce, ESC
+        if (viewingLog) {
+            if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown') {
+                await window.go.main.App.LogNextPage();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+                await window.go.main.App.LogPrevPage();
+            } else if (e.key === 'Escape') {
+                await window.go.main.App.LogExit();
+            }
+            return;
+        }
+
+        if (!connected) return;
+
+        // Ctrl+lettera
+        if (e.ctrlKey && e.key.length === 1) {
+            await window.go.main.App.SendCtrlKey(e.key);
+            return;
+        }
+
+        // Tasti speciali
+        const specialKeys = [
+            'Enter', 'Backspace', 'Tab', 'Escape',
+            'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight',
+            'Home', 'End', 'PageUp', 'PageDown', 'Insert', 'Delete',
+            'F1', 'F2', 'F3', 'F4', 'F5', 'F6',
+            'F7', 'F8', 'F9', 'F10', 'F11', 'F12',
+        ];
+        if (specialKeys.includes(e.key)) {
+            await window.go.main.App.SendSpecialKey(e.key);
+            return;
+        }
+
+        // Caratteri stampabili
+        if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            await window.go.main.App.SendText(e.key);
+        }
+    });
+
+    // Mantieni focus sul canvas
+    canvas.addEventListener('click', () => canvas.focus());
+}
+
+// ═══════════════════════════════════════════
+// UI Controls
+// ═══════════════════════════════════════════
+
+function setupControls() {
+    const btnConnect = document.getElementById('btn-connect');
+    const btnHangup = document.getElementById('btn-hangup');
+    const btnLog = document.getElementById('btn-log');
+    const btnFont = document.getElementById('btn-font');
+    const btnClear = document.getElementById('btn-clear');
+    const btnUpload = document.getElementById('btn-upload');
+    const btnAbout = document.getElementById('btn-about');
+    const btnAboutClose = document.getElementById('btn-about-close');
+    const hostInput = document.getElementById('host-input');
+    const portInput = document.getElementById('port-input');
+    const bbsSelect = document.getElementById('bbs-select');
+
+    // Connetti
+    btnConnect.addEventListener('click', async () => {
+        const host = hostInput.value.trim() || 'bbs.olografix.org';
+        const port = parseInt(portInput.value) || 23;
+        const bbsName = bbsSelect.options[bbsSelect.selectedIndex]?.text || host;
+        btnConnect.disabled = true;
+        hostInput.disabled = true;
+        portInput.disabled = true;
+        bbsSelect.disabled = true;
+
+        const err = await window.go.main.App.Connect(host, port, bbsName);
+        if (err) {
+            setStatus('Errore: ' + err);
+            btnConnect.disabled = false;
+            hostInput.disabled = false;
+            portInput.disabled = false;
+            bbsSelect.disabled = false;
+        }
+        canvas.focus();
+    });
+
+    // Enter nell'input host → connetti
+    hostInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') btnConnect.click();
+    });
+
+    // Disconnect
+    btnHangup.addEventListener('click', async () => {
+        await window.go.main.App.Disconnect();
+    });
+
+    // LOG — carica log sessione
+    btnLog.addEventListener('click', async () => {
+        const err = await window.go.main.App.LoadLog();
+        if (err) {
+            setStatus('Errore log: ' + err);
+        }
+        canvas.focus();
+    });
+
+    // FONT — toggle IBM VGA / VT323
+    btnFont.addEventListener('click', () => {
+        if (currentFont === FONT_IBM_VGA) {
+            currentFont = FONT_VT323;
+            currentFontLabel = 'VT323';
+        } else {
+            currentFont = FONT_IBM_VGA;
+            currentFontLabel = 'IBM VGA';
+        }
+        btnFont.textContent = currentFontLabel;
+        resizeCanvas();
+        setStatus(`Font: ${currentFontLabel}`);
+        canvas.focus();
+    });
+    btnFont.textContent = currentFontLabel;
+
+    // PULISCI
+    btnClear.addEventListener('click', async () => {
+        await window.go.main.App.ClearScreen();
+        canvas.focus();
+    });
+
+    // UPLOAD — file dialog + ZMODEM
+    btnUpload.addEventListener('click', async () => {
+        const err = await window.go.main.App.UploadFile();
+        if (err) {
+            setStatus('Upload: ' + err);
+        }
+        canvas.focus();
+    });
+
+    // About
+    btnAbout.addEventListener('click', () => {
+        document.getElementById('about-overlay').classList.remove('hidden');
+    });
+    btnAboutClose.addEventListener('click', () => {
+        document.getElementById('about-overlay').classList.add('hidden');
+        canvas.focus();
+    });
+
+    // ZMODEM cancel
+    document.getElementById('btn-zmodem-cancel').addEventListener('click', () => {
+        document.getElementById('zmodem-overlay').classList.add('hidden');
+    });
+
+    // BBS dropdown → aggiorna host/port
+    bbsSelect.addEventListener('change', () => {
+        const idx = bbsSelect.selectedIndex;
+        if (idx >= 0 && bbsList[idx]) {
+            hostInput.value = bbsList[idx].host;
+            portInput.value = bbsList[idx].port;
+        }
+    });
+}
+
+function setUIConnected(state) {
+    const btnConnect = document.getElementById('btn-connect');
+    const btnHangup = document.getElementById('btn-hangup');
+    const btnUpload = document.getElementById('btn-upload');
+    const hostInput = document.getElementById('host-input');
+    const portInput = document.getElementById('port-input');
+    const bbsSelect = document.getElementById('bbs-select');
+
+    if (state === 'connected') {
+        connected = true;
+        btnConnect.disabled = true;
+        btnHangup.disabled = false;
+        btnUpload.disabled = false;
+        hostInput.disabled = true;
+        portInput.disabled = true;
+        bbsSelect.disabled = true;
+        const name = bbsSelect.options[bbsSelect.selectedIndex]?.text || '';
+        setStatus(`ANSI │ Telnet │ ${name} (${hostInput.value}:${portInput.value}) │ Online`);
+    } else {
+        connected = false;
+        btnConnect.disabled = false;
+        btnHangup.disabled = true;
+        btnUpload.disabled = true;
+        hostInput.disabled = false;
+        portInput.disabled = false;
+        bbsSelect.disabled = false;
+        setStatus('ANSI │ Telnet │ Offline');
+    }
+}
+
+function setStatus(text) {
+    document.getElementById('status-text').textContent = text;
+}
+
+// ═══════════════════════════════════════════
+// ZMODEM Progress UI
+// ═══════════════════════════════════════════
+
+function showZmodemProgress(filename, filesize) {
+    const overlay = document.getElementById('zmodem-overlay');
+    document.getElementById('zmodem-title').textContent = 'ZMODEM Download';
+    document.getElementById('zmodem-title').style.color = '#FFFF55';
+    document.getElementById('zmodem-file').textContent = 'File: ' + filename;
+    document.getElementById('zmodem-bytes').textContent = `0 / ${formatBytes(filesize)}`;
+    document.getElementById('zmodem-speed').textContent = 'Velocità: — KB/s';
+    document.getElementById('zmodem-eta').textContent = 'ETA: —';
+    document.getElementById('zmodem-bar').style.width = '0%';
+    document.getElementById('btn-zmodem-cancel').textContent = 'ANNULLA';
+    overlay.classList.remove('hidden');
+}
+
+function updateZmodemProgress(bytes, total, speed) {
+    const pct = total > 0 ? Math.round(bytes * 100 / total) : 0;
+    document.getElementById('zmodem-bar').style.width = pct + '%';
+    document.getElementById('zmodem-bytes').textContent =
+        `${formatBytes(bytes)} / ${formatBytes(total)} (${pct}%)`;
+    document.getElementById('zmodem-speed').textContent =
+        `Velocità: ${speed.toFixed(1)} KB/s`;
+
+    if (speed > 0 && total > bytes) {
+        const remaining = (total - bytes) / 1024 / speed;
+        const min = Math.floor(remaining / 60);
+        const sec = Math.floor(remaining % 60);
+        document.getElementById('zmodem-eta').textContent =
+            `ETA: ${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+    }
+}
+
+function showZmodemComplete(filepath) {
+    document.getElementById('zmodem-title').textContent = 'Download completato!';
+    document.getElementById('zmodem-title').style.color = '#55FF55';
+    document.getElementById('zmodem-eta').textContent = 'Completato';
+    document.getElementById('zmodem-bar').style.width = '100%';
+    document.getElementById('btn-zmodem-cancel').textContent = 'CHIUDI';
+}
+
+function showZmodemError(message) {
+    document.getElementById('zmodem-title').textContent = 'Errore ZMODEM';
+    document.getElementById('zmodem-title').style.color = '#FF5555';
+    document.getElementById('zmodem-eta').textContent = message;
+    document.getElementById('btn-zmodem-cancel').textContent = 'CHIUDI';
+}
+
+function formatBytes(b) {
+    if (b > 1024 * 1024) return (b / 1024 / 1024).toFixed(1) + ' MB';
+    if (b > 1024) return (b / 1024).toFixed(1) + ' KB';
+    return b + ' bytes';
+}
+
+// ═══════════════════════════════════════════
+// Wails Events
+// ═══════════════════════════════════════════
+
+let bbsList = [];
+
+function setupEvents() {
+    // Screen update dal backend
+    window.runtime.EventsOn('screen-update', () => {
+        requestScreenUpdate();
+    });
+
+    // Connection status
+    window.runtime.EventsOn('connection-status', (status) => {
+        setUIConnected(status);
+        if (status === 'connected') {
+            canvas.focus();
+        }
+    });
+
+    // Status message
+    window.runtime.EventsOn('status-message', (msg) => {
+        setStatus(msg);
+    });
+
+    // Log mode
+    window.runtime.EventsOn('log-mode', (data) => {
+        if (data === false) {
+            viewingLog = false;
+            setStatus('ANSI │ Telnet │ Offline');
+        } else if (data && data.active) {
+            viewingLog = true;
+            setStatus(`Log [${data.page}/${data.total}] — SPAZIO avanti, ← indietro, ESC esci`);
+        }
+    });
+
+    // ZMODEM events
+    window.runtime.EventsOn('zmodem-started', (data) => {
+        showZmodemProgress(data.filename, data.filesize);
+    });
+    window.runtime.EventsOn('zmodem-progress', (data) => {
+        updateZmodemProgress(data.bytes, data.total, data.speed);
+    });
+    window.runtime.EventsOn('zmodem-finished', (data) => {
+        showZmodemComplete(data.filepath);
+    });
+    window.runtime.EventsOn('zmodem-error', (msg) => {
+        showZmodemError(msg);
+    });
+}
+
+// ═══════════════════════════════════════════
+// BBS List
+// ═══════════════════════════════════════════
+
+async function loadBBSList() {
+    try {
+        bbsList = await window.go.main.App.GetBBSList();
+        const select = document.getElementById('bbs-select');
+        select.innerHTML = '';
+        let defaultIdx = 0;
+        bbsList.forEach((entry, i) => {
+            const opt = document.createElement('option');
+            opt.textContent = entry.name;
+            opt.value = i;
+            select.appendChild(opt);
+            // Cerca Metro Olografix come default
+            if (entry.host === 'bbs.olografix.org' || entry.name.toLowerCase().includes('olografix')) {
+                defaultIdx = i;
+            }
+        });
+        select.selectedIndex = defaultIdx;
+        // Imposta host/port dall'elemento selezionato
+        if (bbsList.length > 0) {
+            document.getElementById('host-input').value = bbsList[defaultIdx].host;
+            document.getElementById('port-input').value = bbsList[defaultIdx].port;
+        }
+    } catch (e) {
+        console.error('loadBBSList error:', e);
+    }
+}
+
+// ═══════════════════════════════════════════
+// Init
+// ═══════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', async () => {
+    initCanvas();
+    setupKeyboard();
+    setupControls();
+
+    // Aspetta che Wails sia pronto
+    await new Promise(resolve => {
+        if (window.runtime) {
+            resolve();
+        } else {
+            const check = setInterval(() => {
+                if (window.runtime) {
+                    clearInterval(check);
+                    resolve();
+                }
+            }, 50);
+        }
+    });
+
+    setupEvents();
+    await loadBBSList();
+
+    // Messaggio iniziale
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = `${FONT_SIZE}px ${currentFont}`;
+    ctx.fillStyle = '#FFFF55';
+    ctx.fillText('BBS Client for Gen-Z v0.4.0 — Pronto', 10, 20);
+    ctx.fillStyle = '#55FFFF';
+    ctx.fillText('Seleziona una BBS e premi CONNETTI', 10, 44);
+    ctx.fillStyle = '#555555';
+    ctx.fillText('Ctrl+] per disconnettere', 10, 68);
+
+    canvas.focus();
+});
