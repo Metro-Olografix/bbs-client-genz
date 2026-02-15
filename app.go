@@ -10,6 +10,7 @@ import (
 	"strings"
 	"sync"
 	"time"
+	"unicode/utf8"
 
 	wailsrt "github.com/wailsapp/wails/v2/pkg/runtime"
 
@@ -36,6 +37,13 @@ type ScreenCell struct {
 	Underline bool   `json:"ul"`
 	Blink     bool   `json:"blink"`
 	Reverse   bool   `json:"rev"`
+}
+
+// ScreenSnapshot — schermo + cursore in una singola risposta (BUG-010)
+type ScreenSnapshot struct {
+	Cells   [][]ScreenCell `json:"cells"`
+	CursorX int            `json:"cursorX"`
+	CursorY int            `json:"cursorY"`
 }
 
 // ─────────────────────────────────────────────
@@ -96,9 +104,9 @@ func (a *App) Startup(ctx context.Context) {
 		a.conn.Send(data)
 	}
 
-	// Prepara directory logs
+	// Prepara directory logs (SEC-005: 0700 per proteggere dati sensibili)
 	a.logDir = a.logsDir()
-	os.MkdirAll(a.logDir, 0755)
+	os.MkdirAll(a.logDir, 0700)
 
 	// Carica lista BBS
 	a.bbsList = a.loadBBSList()
@@ -141,6 +149,7 @@ func (a *App) startSessionLog(bbsName, host string, port int) {
 		return
 	}
 	a.logFile = f
+	logBytesWritten = 0 // PT-004: reset contatore
 
 	// Intestazione
 	header := fmt.Sprintf("=== Sessione %s (%s:%d) — %s ===\n",
@@ -148,10 +157,21 @@ func (a *App) startSessionLog(bbsName, host string, port int) {
 	f.WriteString(header)
 }
 
+// maxLogSize è il limite massimo per file di log (PT-004: anti-flooding)
+const maxLogSize = 50 * 1024 * 1024 // 50 MB
+
+// logBytesWritten conta i byte scritti nel log corrente
+var logBytesWritten int64
+
 // writeSessionLog scrive dati decodificati (con sequenze ANSI) nel log.
 func (a *App) writeSessionLog(text string) {
 	if a.logFile != nil {
-		a.logFile.WriteString(text)
+		// PT-004: limita dimensione log per prevenire DoS locale
+		if logBytesWritten > maxLogSize {
+			return // silenziosamente ignora dopo il limite
+		}
+		n, _ := a.logFile.WriteString(text)
+		logBytesWritten += int64(n)
 	}
 }
 
@@ -172,9 +192,12 @@ func (a *App) stopSessionLog() {
 
 // Connect si connette alla BBS. bbsName è il nome visualizzato nel dropdown.
 func (a *App) Connect(host string, port int, bbsName string) string {
+	a.mu.Lock()
 	if a.connected {
+		a.mu.Unlock()
 		return "Già connesso"
 	}
+	a.mu.Unlock()
 	if host == "" {
 		host = telnet.DefaultHost
 	}
@@ -190,6 +213,12 @@ func (a *App) Connect(host string, port int, bbsName string) string {
 	}
 	a.startSessionLog(bbsName, host, port)
 
+	// BUG-007: reset screen prima di nuova connessione
+	a.mu.Lock()
+	a.screen.Reset()
+	a.mu.Unlock()
+	wailsrt.EventsEmit(a.ctx, "screen-update", true)
+
 	err := a.conn.Connect(host, port)
 	if err != nil {
 		a.stopSessionLog()
@@ -201,21 +230,29 @@ func (a *App) Connect(host string, port int, bbsName string) string {
 // Disconnect chiude la connessione.
 func (a *App) Disconnect() {
 	a.conn.Disconnect()
+	a.mu.Lock()
 	a.connected = false
+	a.mu.Unlock()
 	a.stopSessionLog()
 	wailsrt.EventsEmit(a.ctx, "connection-status", "disconnected")
 }
 
 // SendKey invia un tasto al server (chiamato dal frontend su keydown).
 func (a *App) SendKey(data []byte) {
-	if a.connected {
+	a.mu.Lock()
+	ok := a.connected
+	a.mu.Unlock()
+	if ok {
 		a.conn.Send(data)
 	}
 }
 
 // SendText invia una stringa come bytes CP437 al server.
 func (a *App) SendText(text string) {
-	if !a.connected {
+	a.mu.Lock()
+	ok := a.connected
+	a.mu.Unlock()
+	if !ok {
 		return
 	}
 	// Converti da UTF-8 a bytes da inviare
@@ -224,7 +261,10 @@ func (a *App) SendText(text string) {
 
 // SendSpecialKey invia un tasto speciale (arrow, F-key, ecc.)
 func (a *App) SendSpecialKey(key string) {
-	if !a.connected {
+	a.mu.Lock()
+	ok := a.connected
+	a.mu.Unlock()
+	if !ok {
 		return
 	}
 	keyMap := map[string][]byte{
@@ -262,7 +302,10 @@ func (a *App) SendSpecialKey(key string) {
 
 // SendCtrlKey invia Ctrl+lettera
 func (a *App) SendCtrlKey(letter string) {
-	if !a.connected || len(letter) == 0 {
+	a.mu.Lock()
+	ok := a.connected
+	a.mu.Unlock()
+	if !ok || len(letter) == 0 {
 		return
 	}
 	ch := letter[0]
@@ -313,6 +356,42 @@ func (a *App) GetCursor() map[string]int {
 	return map[string]int{"x": a.screen.CursorX, "y": a.screen.CursorY}
 }
 
+// GetScreenSnapshot ritorna schermo + cursore in una singola chiamata IPC (BUG-010).
+func (a *App) GetScreenSnapshot() ScreenSnapshot {
+	a.mu.Lock()
+	defer a.mu.Unlock()
+
+	rows := make([][]ScreenCell, a.screen.Rows)
+	for y := 0; y < a.screen.Rows; y++ {
+		row := make([]ScreenCell, a.screen.Cols)
+		for x := 0; x < a.screen.Cols; x++ {
+			cell := a.screen.Buffer[y][x]
+			fgR, fgG, fgB := cell.Attr.FG.ToRGB(true, cell.Attr.Bold)
+			bgR, bgG, bgB := cell.Attr.BG.ToRGB(false, false)
+			if cell.Attr.Reverse {
+				fgR, fgG, fgB, bgR, bgG, bgB = bgR, bgG, bgB, fgR, fgG, fgB
+			}
+			ch := string(cell.Char)
+			if cell.Char < 0x20 {
+				ch = " "
+			}
+			row[x] = ScreenCell{
+				Char: ch,
+				FgR: fgR, FgG: fgG, FgB: fgB,
+				BgR: bgR, BgG: bgG, BgB: bgB,
+				Bold: cell.Attr.Bold, Underline: cell.Attr.Underline,
+				Blink: cell.Attr.Blink, Reverse: cell.Attr.Reverse,
+			}
+		}
+		rows[y] = row
+	}
+	return ScreenSnapshot{
+		Cells:   rows,
+		CursorX: a.screen.CursorX,
+		CursorY: a.screen.CursorY,
+	}
+}
+
 // GetBBSList ritorna la lista delle BBS disponibili.
 func (a *App) GetBBSList() []BBSEntry {
 	return a.bbsList
@@ -328,12 +407,17 @@ func (a *App) ClearScreen() {
 
 // IsConnected ritorna lo stato di connessione.
 func (a *App) IsConnected() bool {
+	a.mu.Lock()
+	defer a.mu.Unlock()
 	return a.connected
 }
 
 // UploadFile apre un file dialog e avvia upload ZMODEM.
 func (a *App) UploadFile() string {
-	if !a.connected {
+	a.mu.Lock()
+	ok := a.connected
+	a.mu.Unlock()
+	if !ok {
 		return "Non connesso"
 	}
 	path, err := wailsrt.OpenFileDialog(a.ctx, wailsrt.OpenDialogOptions{
@@ -349,6 +433,11 @@ func (a *App) UploadFile() string {
 		a.conn.StartZmodemUpload(path)
 	}()
 	return ""
+}
+
+// CancelZmodem annulla il trasferimento ZMODEM in corso.
+func (a *App) CancelZmodem() {
+	a.conn.CancelZmodem()
 }
 
 // LoadLog apre un file di log sessione e lo renderizza nel terminale.
@@ -374,9 +463,14 @@ func (a *App) LoadLog() string {
 	}
 
 	// Se connesso, disconnetti
-	if a.connected {
-		a.conn.Disconnect()
+	a.mu.Lock()
+	wasConn := a.connected
+	if wasConn {
 		a.connected = false
+	}
+	a.mu.Unlock()
+	if wasConn {
+		a.conn.Disconnect()
 	}
 
 	// Rimuovi intestazione/chiusura sessione
@@ -472,8 +566,8 @@ func (a *App) showLogPage() {
 		hint = "ULTIMA PAGINA  |  ← indietro  |  ESC ✖ esci"
 	}
 	bar := fmt.Sprintf(" Log [%d/%d]  %s ", current, total, hint)
-	// Pad a 80 colonne
-	for len(bar) < 80 {
+	// BUG-006: pad a 80 colonne usando conteggio rune (non byte) per Unicode
+	for utf8.RuneCountInString(bar) < 80 {
 		bar += " "
 	}
 	prompt := fmt.Sprintf("\x1b[25;1H\x1b[0;7m%s\x1b[0m", bar)
@@ -493,6 +587,10 @@ func (a *App) showLogPage() {
 func (a *App) eventLoop() {
 	for {
 		select {
+		case <-a.ctx.Done():
+			// BUG-002: termina la goroutine quando l'app si chiude
+			return
+
 		case data := <-a.conn.DataCh:
 			// Decodifica CP437 e alimenta lo screen buffer
 			text := decodeCp437(data)
@@ -507,15 +605,21 @@ func (a *App) eventLoop() {
 		case event := <-a.conn.EventCh:
 			switch event.Type {
 			case telnet.EventConnected:
+				a.mu.Lock()
 				a.connected = true
+				a.mu.Unlock()
 				wailsrt.EventsEmit(a.ctx, "connection-status", "connected")
 			case telnet.EventDisconnected:
+				a.mu.Lock()
 				a.connected = false
+				a.mu.Unlock()
 				a.stopSessionLog()
 				wailsrt.EventsEmit(a.ctx, "connection-status", "disconnected")
 				wailsrt.EventsEmit(a.ctx, "status-message", "Disconnesso: "+event.Message)
 			case telnet.EventError:
+				a.mu.Lock()
 				a.connected = false
+				a.mu.Unlock()
 				a.stopSessionLog()
 				wailsrt.EventsEmit(a.ctx, "connection-status", "error")
 				wailsrt.EventsEmit(a.ctx, "status-message", "Errore: "+event.Message)

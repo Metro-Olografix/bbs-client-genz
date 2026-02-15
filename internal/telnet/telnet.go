@@ -83,6 +83,9 @@ type Connection struct {
 	zmodemActive    bool
 	zmodemDetectBuf []byte
 	downloadDir     string
+
+	// BUG-004: buffer riporto per sequenze IAC incomplete tra recv
+	iacRemainder []byte
 }
 
 // EventType identifica il tipo di evento di connessione
@@ -118,8 +121,8 @@ func New() *Connection {
 	dlDir := filepath.Join(filepath.Dir(exe), "downloads")
 
 	return &Connection{
-		DataCh:      make(chan []byte, 64),
-		EventCh:     make(chan Event, 16),
+		DataCh:      make(chan []byte, 256),
+		EventCh:     make(chan Event, 32),
 		Cols:        DefaultCols,
 		Rows:        DefaultRows,
 		stopCh:      make(chan struct{}),
@@ -238,6 +241,11 @@ func (c *Connection) recvLoop() {
 						c.emitEvent(Event{Type: EventZmodemError, Message: "Timeout ZMODEM — nessun dato ricevuto"})
 						c.zmodemReceiver.Cancel()
 						c.zmodemActive = false
+					} else if elapsed > 30 && (c.zmodemReceiver.State == zmodem.RxInit || c.zmodemReceiver.State == zmodem.RxWaitZFile) {
+						// PT-005: timeout per false positive — se dopo 30s siamo ancora in attesa di ZFILE
+						c.emitEvent(Event{Type: EventZmodemError, Message: "Timeout ZMODEM — nessun file offerto dal server"})
+						c.zmodemReceiver.Cancel()
+						c.zmodemActive = false
 					}
 				}
 				continue
@@ -317,11 +325,17 @@ func (c *Connection) recvLoop() {
 }
 
 func (c *Connection) emitData(data []byte) {
+	// Prova invio immediato; se il channel è pieno, attendi fino a 100ms
+	// prima di scartare (BUG-003: evita drop silenzioso durante burst)
 	select {
 	case c.DataCh <- data:
 	default:
-		if c.Debug {
-			log.Printf("[TELNET] DataCh pieno, drop %d bytes", len(data))
+		select {
+		case c.DataCh <- data:
+		case <-time.After(100 * time.Millisecond):
+			if c.Debug {
+				log.Printf("[TELNET] DataCh pieno dopo 100ms, drop %d bytes", len(data))
+			}
 		}
 	}
 }
@@ -330,6 +344,14 @@ func (c *Connection) emitEvent(e Event) {
 	select {
 	case c.EventCh <- e:
 	default:
+		// Retry con timeout breve per eventi importanti
+		select {
+		case c.EventCh <- e:
+		case <-time.After(100 * time.Millisecond):
+			if c.Debug {
+				log.Printf("[TELNET] EventCh pieno, drop event type=%d", e.Type)
+			}
+		}
 	}
 }
 
@@ -348,7 +370,7 @@ func (c *Connection) zmodemLog(msg string) {
 }
 
 func (c *Connection) startZmodemDownload(initialData []byte) {
-	os.MkdirAll(c.downloadDir, 0755)
+	os.MkdirAll(c.downloadDir, 0700)
 
 	rx := zmodem.NewReceiver(c.downloadDir, c.zmodemSendData, c.zmodemLog)
 
@@ -420,6 +442,12 @@ func (c *Connection) CancelZmodem() {
 // processTelnet processa i dati raw dal socket, gestisce le sequenze IAC
 // e ritorna i dati puliti. Equivalente di _process_telnet() Python.
 func (c *Connection) processTelnet(data []byte) []byte {
+	// BUG-004: prependi eventuali byte rimasti dal ciclo precedente
+	if len(c.iacRemainder) > 0 {
+		data = append(c.iacRemainder, data...)
+		c.iacRemainder = nil
+	}
+
 	clean := make([]byte, 0, len(data))
 	i := 0
 	n := len(data)
@@ -429,6 +457,8 @@ func (c *Connection) processTelnet(data []byte) []byte {
 
 		if b == IAC {
 			if i+1 >= n {
+				// BUG-004: IAC all'ultimo byte — salva per il prossimo ciclo
+				c.iacRemainder = append([]byte{}, data[i:]...)
 				break
 			}
 			cmd := data[i+1]
@@ -441,7 +471,10 @@ func (c *Connection) processTelnet(data []byte) []byte {
 
 			case DO, DONT, WILL, WONT:
 				if i+2 >= n {
-					break
+					// BUG-004: sequenza incompleta — salva per il prossimo ciclo
+					c.iacRemainder = append([]byte{}, data[i:]...)
+					i = n // esci dal loop
+					continue
 				}
 				c.negotiate(cmd, data[i+2])
 				i += 3
@@ -450,8 +483,10 @@ func (c *Connection) processTelnet(data []byte) []byte {
 				// Cerca IAC SE per la fine della subnegotiation
 				end := findIACSE(data, i)
 				if end == -1 {
-					// Subnegotiation incompleta, interrompi
-					break
+					// BUG-004: subnegotiation incompleta — salva per il prossimo ciclo
+					c.iacRemainder = append([]byte{}, data[i:]...)
+					i = n // esci dal loop
+					continue
 				}
 				c.subnegotiate(data[i+2 : end])
 				i = end + 2
