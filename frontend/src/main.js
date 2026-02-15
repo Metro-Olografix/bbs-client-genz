@@ -539,6 +539,14 @@ async function loadBBSList() {
 // ═══════════════════════════════════════════
 
 document.addEventListener('DOMContentLoaded', async () => {
+    // Aspetta che il font IBM VGA sia caricato prima di misurare le celle
+    try {
+        await document.fonts.load(`${FONT_SIZE}px "IBM VGA"`);
+        await document.fonts.ready;
+    } catch (e) {
+        console.warn('Font preload warning:', e);
+    }
+
     initCanvas();
     setupKeyboard();
     setupControls();
@@ -562,10 +570,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Messaggio iniziale
     ctx.fillStyle = '#000';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillRect(0, 0, canvas.width / dpr, canvas.height / dpr);
     ctx.font = `${FONT_SIZE}px ${currentFont}`;
     ctx.fillStyle = '#FFFF55';
-    ctx.fillText('BBS Client for Gen-Z v0.9.0 — Pronto', 10, 20);
+    ctx.fillText('BBS Client for Gen-Z v1.0.0 — Pronto', 10, 20);
     ctx.fillStyle = '#55FFFF';
     ctx.fillText('Seleziona una BBS e premi CONNETTI', 10, 44);
     ctx.fillStyle = '#555555';
